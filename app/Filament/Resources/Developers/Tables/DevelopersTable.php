@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Developers\Tables;
 
 use App\Enums\DeveloperStatus;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -114,40 +115,42 @@ class DevelopersTable
                     }),
             ])
             ->recordActions([
-                Action::make('approve')
-                    ->label('Approve')
-                    ->icon('heroicon-o-check-circle')
-                    ->color('success')
-                    ->requiresConfirmation()
-                    ->visible(fn($record) => $record->status !== DeveloperStatus::APPROVED)
-                    ->action(function ($record) {
-                        $record->update(['status' => DeveloperStatus::APPROVED]);
+                ActionGroup::make([
+                    Action::make('approve')
+                        ->label('Approve')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->requiresConfirmation()
+                        ->visible(fn($record) => $record->status !== DeveloperStatus::APPROVED)
+                        ->action(function ($record) {
+                            $record->update(['status' => DeveloperStatus::APPROVED]);
 
-                        Notification::make()
-                            ->title('Developer Approved')
-                            ->body("Developer {$record->name} has been approved.")
-                            ->success()
-                            ->send();
-                    }),
+                            Notification::make()
+                                ->title('Developer Approved')
+                                ->body("Developer {$record->name} has been approved.")
+                                ->success()
+                                ->send();
+                        }),
 
-                Action::make('reject')
-                    ->label('Reject')
-                    ->icon('heroicon-o-x-circle')
-                    ->color('danger')
-                    ->requiresConfirmation()
-                    ->visible(fn($record) => $record->status !== DeveloperStatus::REJECTED)
-                    ->action(function ($record) {
-                        $record->update(['status' => DeveloperStatus::REJECTED]);
+                    Action::make('reject')
+                        ->label('Reject')
+                        ->icon('heroicon-o-x-circle')
+                        ->color('danger')
+                        ->requiresConfirmation()
+                        ->visible(fn($record) => $record->status !== DeveloperStatus::REJECTED)
+                        ->action(function ($record) {
+                            $record->update(['status' => DeveloperStatus::REJECTED]);
 
-                        Notification::make()
-                            ->title('Developer Rejected')
-                            ->body("Developer {$record->name} has been rejected.")
-                            ->warning()
-                            ->send();
-                    }),
+                            Notification::make()
+                                ->title('Developer Rejected')
+                                ->body("Developer {$record->name} has been rejected.")
+                                ->warning()
+                                ->send();
+                        }),
 
-                EditAction::make(),
-                DeleteAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
