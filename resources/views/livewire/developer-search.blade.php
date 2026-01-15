@@ -108,7 +108,7 @@
                 </svg>
                 Pro Developers
             </h2>
-            <p class="section-subtitle">Verified professionals with pro accounts</p>
+            <p class="section-subtitle">Featured developers with pro profiles</p>
         </div>
         <div class="developers-grid">
             @foreach($proDevelopers as $developer)

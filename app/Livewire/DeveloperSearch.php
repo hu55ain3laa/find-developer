@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\IraqiGovernorate;
 use App\Enums\SubscriptionPlan;
 use App\Models\Developer;
 use App\Models\JobTitle;
@@ -34,6 +35,7 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             'search' => '',
             'jobTitleIds' => [],
             'skillIds' => [],
+            'locationIds' => [],
             'minExperience' => null,
             'maxExperience' => null,
             'availableOnly' => true,
@@ -74,6 +76,18 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->live()
                                     ->afterStateUpdated(fn() => $this->resetPage()),
 
+                                Select::make('locationIds')
+                                    ->label('Locations')
+                                    ->multiple()
+                                    ->searchable()
+                                    ->options(
+                                        collect(IraqiGovernorate::cases())->mapWithKeys(
+                                            fn($case) => [$case->value => $case->getLabel()]
+                                        )
+                                    )
+                                    ->live()
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
+
                                 TextInput::make('minExperience')
                                     ->label('Min Experience (years)')
                                     ->numeric()
@@ -107,6 +121,7 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             'search' => '',
             'jobTitleIds' => [],
             'skillIds' => [],
+            'locationIds' => [],
             'minExperience' => null,
             'maxExperience' => null,
             'availableOnly' => true,
@@ -137,6 +152,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                 $query->whereHas('skills', function ($skillQuery) use ($filters) {
                     $skillQuery->whereIn('skills.id', $filters['skillIds']);
                 });
+            })
+            ->when(!empty($filters['locationIds']), function ($query) use ($filters) {
+                $query->whereIn('location', $filters['locationIds']);
             })
             ->when(!empty($filters['minExperience']), function ($query) use ($filters) {
                 $query->where('years_of_experience', '>=', $filters['minExperience']);
