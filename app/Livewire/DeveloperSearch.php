@@ -86,7 +86,6 @@ class DeveloperSearch extends Component
             ->when($this->availableOnly, function ($query) {
                 $query->where('is_available', true);
             })
-            ->approved()
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 

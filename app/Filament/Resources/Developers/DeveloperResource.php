@@ -8,11 +8,13 @@ use App\Filament\Resources\Developers\Pages\ListDevelopers;
 use App\Filament\Resources\Developers\Schemas\DeveloperForm;
 use App\Filament\Resources\Developers\Tables\DevelopersTable;
 use App\Models\Developer;
+use App\Models\Scopes\ApprovedScope;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class DeveloperResource extends Resource
 {
@@ -30,6 +32,13 @@ class DeveloperResource extends Resource
     public static function table(Table $table): Table
     {
         return DevelopersTable::configure($table);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes([
+            ApprovedScope::class,
+        ]);
     }
 
     public static function getRelations(): array

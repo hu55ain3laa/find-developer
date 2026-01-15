@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Scopes\ApprovedScope;
 
+#[ScopedBy([ApprovedScope::class])]
 class Developer extends Model
 {
     use HasFactory;
