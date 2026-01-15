@@ -6,7 +6,6 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Models\Contracts\FilamentUser;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -20,12 +19,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider implements FilamentUser
+class AdminPanelProvider extends PanelProvider
 {
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return auth()->user()->email === 'ht3aa2001@gmail.com';
-    }
 
     public function panel(Panel $panel): Panel
     {
