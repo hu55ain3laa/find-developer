@@ -22,17 +22,62 @@
 
             <!-- Job Title Filter -->
             <div class="form-group">
-                <label for="jobTitle" class="form-label">Job Title</label>
+                <label for="jobTitle" class="form-label">Job Titles</label>
                 <select 
                     id="jobTitle"
-                    wire:model.live="jobTitleId"
+                    wire:model.live="jobTitleIds"
                     class="form-select"
+                    multiple
+                    size="1"
                 >
-                    <option value="">All Job Titles</option>
                     @foreach($jobTitles as $jobTitle)
                         <option value="{{ $jobTitle->id }}">{{ $jobTitle->name }}</option>
                     @endforeach
                 </select>
+                @if(!empty($jobTitleIds))
+                    <div class="selected-filters">
+                        @foreach($jobTitles->whereIn('id', $jobTitleIds) as $jobTitle)
+                            <span class="filter-badge">
+                                {{ $jobTitle->name }}
+                                <button 
+                                    type="button" 
+                                    wire:click="$set('jobTitleIds', {{ json_encode(array_values(array_diff($jobTitleIds, [$jobTitle->id]))) }})"
+                                    class="filter-remove"
+                                >×</button>
+                            </span>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+
+            <!-- Skills Filter -->
+            <div class="form-group">
+                <label for="skills" class="form-label">Skills</label>
+                <select 
+                    id="skills"
+                    wire:model.live="skillIds"
+                    class="form-select"
+                    multiple
+                    size="1"
+                >
+                    @foreach($skills as $skill)
+                        <option value="{{ $skill->id }}">{{ $skill->name }}</option>
+                    @endforeach
+                </select>
+                @if(!empty($skillIds))
+                    <div class="selected-filters">
+                        @foreach($skills->whereIn('id', $skillIds) as $skill)
+                            <span class="filter-badge">
+                                {{ $skill->name }}
+                                <button 
+                                    type="button" 
+                                    wire:click="$set('skillIds', {{ json_encode(array_values(array_diff($skillIds, [$skill->id]))) }})"
+                                    class="filter-remove"
+                                >×</button>
+                            </span>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <!-- Min Experience -->

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Enums\DeveloperStatus;
 use App\Models\Developer;
 use App\Models\JobTitle;
+use App\Models\Skill;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,14 +14,16 @@ class DeveloperSearch extends Component
     use WithPagination;
 
     public $search = '';
-    public $jobTitleId = '';
+    public $jobTitleIds = [];
+    public $skillIds = [];
     public $minExperience = '';
     public $maxExperience = '';
     public $availableOnly = true;
 
     protected $queryString = [
         'search' => ['except' => ''],
-        'jobTitleId' => ['except' => ''],
+        'jobTitleIds' => ['except' => []],
+        'skillIds' => ['except' => []],
         'minExperience' => ['except' => ''],
         'maxExperience' => ['except' => ''],
     ];
@@ -30,7 +33,12 @@ class DeveloperSearch extends Component
         $this->resetPage();
     }
 
-    public function updatingJobTitleId()
+    public function updatingJobTitleIds()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingSkillIds()
     {
         $this->resetPage();
     }
@@ -52,13 +60,17 @@ class DeveloperSearch extends Component
 
     public function clearFilters()
     {
-        $this->reset(['search', 'jobTitleId', 'minExperience', 'maxExperience', 'availableOnly']);
+        $this->reset(['search', 'jobTitleIds', 'skillIds', 'minExperience', 'maxExperience', 'availableOnly']);
         $this->resetPage();
     }
 
     public function render()
     {
         $jobTitles = JobTitle::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        $skills = Skill::where('is_active', true)
             ->orderBy('name')
             ->get();
 
@@ -74,8 +86,13 @@ class DeveloperSearch extends Component
                         });
                 });
             })
-            ->when($this->jobTitleId, function ($query) {
-                $query->where('job_title_id', $this->jobTitleId);
+            ->when(!empty($this->jobTitleIds), function ($query) {
+                $query->whereIn('job_title_id', $this->jobTitleIds);
+            })
+            ->when(!empty($this->skillIds), function ($query) {
+                $query->whereHas('skills', function ($skillQuery) {
+                    $skillQuery->whereIn('skills.id', $this->skillIds);
+                });
             })
             ->when($this->minExperience !== '', function ($query) {
                 $query->where('years_of_experience', '>=', $this->minExperience);
@@ -92,6 +109,7 @@ class DeveloperSearch extends Component
         return view('livewire.developer-search', [
             'developers' => $developers,
             'jobTitles' => $jobTitles,
+            'skills' => $skills,
         ]);
     }
 }
