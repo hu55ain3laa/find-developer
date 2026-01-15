@@ -11,11 +11,16 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Custom CSS -->
-        <link href="{{ asset('css/developer-search.css') }}" rel="stylesheet">
         
         <!-- Scripts -->
-        @vite(['resources/js/app.js'])
+        @vite(['resources/js/app.js', 'resources/css/filament/admin/theme.css'])
+
+        <!-- Custom CSS -->
+        <link href="{{ asset('css/developer-search.css') }}" rel="stylesheet">
+
+        <!-- Filament Styles -->
+        @filamentStyles
+
         @livewireStyles
     </head>
     <body>
@@ -48,5 +53,6 @@
         </footer>
 
         @livewireScripts
+        @filamentScripts
     </body>
 </html>

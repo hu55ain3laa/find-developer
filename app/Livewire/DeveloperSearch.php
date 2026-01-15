@@ -7,101 +7,139 @@ use App\Enums\SubscriptionPlan;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class DeveloperSearch extends Component
+class DeveloperSearch extends Component implements HasSchemas, HasActions
 {
     use WithPagination;
+    use InteractsWithSchemas;
+    use InteractsWithActions;
 
-    public $search = '';
-    public $jobTitleIds = [];
-    public $skillIds = [];
-    public $minExperience = '';
-    public $maxExperience = '';
-    public $availableOnly = true;
+    public ?array $filterData = [];
 
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'jobTitleIds' => ['except' => []],
-        'skillIds' => ['except' => []],
-        'minExperience' => ['except' => ''],
-        'maxExperience' => ['except' => ''],
-    ];
-
-    public function updatingSearch()
+    public function mount(): void
     {
-        $this->resetPage();
+        $this->filterData = [
+            'search' => '',
+            'jobTitleIds' => [],
+            'skillIds' => [],
+            'minExperience' => null,
+            'maxExperience' => null,
+            'availableOnly' => true,
+        ];
     }
 
-    public function updatingJobTitleIds()
+    public function form(Schema $schema): Schema
     {
-        $this->resetPage();
+        return $schema
+            ->components([
+                TextInput::make('search')
+                    ->label('Search')
+                    ->placeholder('Name, email, location, skills...')
+                    ->columnSpanFull()
+                    ->live(debounce: 300)
+                    ->hidden()
+                    ->afterStateUpdated(fn() => $this->resetPage()),
+
+                Grid::make(2)
+                    ->schema([
+                        Select::make('jobTitleIds')
+                            ->label('Job Titles')
+                            ->multiple()
+                            ->searchable()
+                            ->options(JobTitle::where('is_active', true)->pluck('name', 'id'))
+                            ->live()
+                            ->afterStateUpdated(fn() => $this->resetPage()),
+
+                        Select::make('skillIds')
+                            ->label('Skills')
+                            ->multiple()
+                            ->searchable()
+                            ->options(Skill::where('is_active', true)->pluck('name', 'id'))
+                            ->live()
+                            ->afterStateUpdated(fn() => $this->resetPage()),
+
+                        TextInput::make('minExperience')
+                            ->label('Min Experience (years)')
+                            ->numeric()
+                            ->minValue(0)
+                            ->placeholder('0')
+                            ->live(debounce: 300)
+                            ->afterStateUpdated(fn() => $this->resetPage()),
+
+                        TextInput::make('maxExperience')
+                            ->label('Max Experience (years)')
+                            ->numeric()
+                            ->minValue(0)
+                            ->placeholder('50')
+                            ->live(debounce: 300)
+                            ->afterStateUpdated(fn() => $this->resetPage()),
+                    ]),
+
+                Checkbox::make('availableOnly')
+                    ->label('Available only')
+                    ->default(true)
+                    ->hidden()
+                    ->live()
+                    ->afterStateUpdated(fn() => $this->resetPage()),
+            ])
+            ->statePath('filterData');
     }
 
-    public function updatingSkillIds()
+    public function clearFilters(): void
     {
-        $this->resetPage();
-    }
-
-    public function updatingMinExperience()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingMaxExperience()
-    {
-        $this->resetPage();
-    }
-
-    public function updatingAvailableOnly()
-    {
-        $this->resetPage();
-    }
-
-    public function clearFilters()
-    {
-        $this->reset(['search', 'jobTitleIds', 'skillIds', 'minExperience', 'maxExperience', 'availableOnly']);
+        $this->filterData = [
+            'search' => '',
+            'jobTitleIds' => [],
+            'skillIds' => [],
+            'minExperience' => null,
+            'maxExperience' => null,
+            'availableOnly' => true,
+        ];
         $this->resetPage();
     }
 
     public function render()
     {
-        $jobTitles = JobTitle::where('is_active', true)
-            ->orderBy('name')
-            ->get();
-
-        $skills = Skill::where('is_active', true)
-            ->orderBy('name')
-            ->get();
+        $filters = $this->filterData;
 
         $baseQuery = Developer::query()
             ->with(['jobTitle', 'skills'])
-            ->when($this->search, function ($query) {
-                $query->where(function ($q) {
-                    $q->where('name', 'like', '%' . $this->search . '%')
-                        ->orWhere('email', 'like', '%' . $this->search . '%')
-                        ->orWhere('location', 'like', '%' . $this->search . '%')
-                        ->orWhereHas('skills', function ($skillQuery) {
-                            $skillQuery->where('name', 'like', '%' . $this->search . '%');
+            ->when(!empty($filters['search']), function ($query) use ($filters) {
+                $query->where(function ($q) use ($filters) {
+                    $q->where('name', 'like', '%' . $filters['search'] . '%')
+                        ->orWhere('email', 'like', '%' . $filters['search'] . '%')
+                        ->orWhere('location', 'like', '%' . $filters['search'] . '%')
+                        ->orWhereHas('skills', function ($skillQuery) use ($filters) {
+                            $skillQuery->where('name', 'like', '%' . $filters['search'] . '%');
                         });
                 });
             })
-            ->when(!empty($this->jobTitleIds), function ($query) {
-                $query->whereIn('job_title_id', $this->jobTitleIds);
+            ->when(!empty($filters['jobTitleIds']), function ($query) use ($filters) {
+                $query->whereIn('job_title_id', $filters['jobTitleIds']);
             })
-            ->when(!empty($this->skillIds), function ($query) {
-                $query->whereHas('skills', function ($skillQuery) {
-                    $skillQuery->whereIn('skills.id', $this->skillIds);
+            ->when(!empty($filters['skillIds']), function ($query) use ($filters) {
+                $query->whereHas('skills', function ($skillQuery) use ($filters) {
+                    $skillQuery->whereIn('skills.id', $filters['skillIds']);
                 });
             })
-            ->when($this->minExperience !== '', function ($query) {
-                $query->where('years_of_experience', '>=', $this->minExperience);
+            ->when(!empty($filters['minExperience']), function ($query) use ($filters) {
+                $query->where('years_of_experience', '>=', $filters['minExperience']);
             })
-            ->when($this->maxExperience !== '', function ($query) {
-                $query->where('years_of_experience', '<=', $this->maxExperience);
+            ->when(!empty($filters['maxExperience']), function ($query) use ($filters) {
+                $query->where('years_of_experience', '<=', $filters['maxExperience']);
             })
-            ->when($this->availableOnly, function ($query) {
+            ->when($filters['availableOnly'] ?? false, function ($query) {
                 $query->where('is_available', true);
             });
 
@@ -128,8 +166,6 @@ class DeveloperSearch extends Component
             'proDevelopers' => $proDevelopers,
             'freeDevelopers' => $freeDevelopers,
             'totalCount' => $totalCount,
-            'jobTitles' => $jobTitles,
-            'skills' => $skills,
         ]);
     }
 }

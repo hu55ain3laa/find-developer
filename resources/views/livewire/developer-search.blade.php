@@ -7,118 +7,13 @@
 
     <!-- Search & Filter Section -->
     <div class="search-card">
-        <div class="search-grid">
-            <!-- Search Input -->
-            <div class="form-group">
-                <label for="search" class="form-label">Search</label>
-                <input 
-                    type="text" 
-                    id="search"
-                    wire:model.live.debounce.300ms="search" 
-                    placeholder="Name, email, location, skills..."
-                    class="form-input"
-                >
-            </div>
+        <form wire:submit="search">
+            {{ $this->form }}
+        </form>
 
-            <!-- Job Title Filter -->
-            <div class="form-group">
-                <label for="jobTitle" class="form-label">Job Titles</label>
-                <select 
-                    id="jobTitle"
-                    wire:model.live="jobTitleIds"
-                    class="form-select"
-                    multiple
-                    size="1"
-                >
-                    @foreach($jobTitles as $jobTitle)
-                        <option value="{{ $jobTitle->id }}">{{ $jobTitle->name }}</option>
-                    @endforeach
-                </select>
-                @if(!empty($jobTitleIds))
-                    <div class="selected-filters">
-                        @foreach($jobTitles->whereIn('id', $jobTitleIds) as $jobTitle)
-                            <span class="filter-badge">
-                                {{ $jobTitle->name }}
-                                <button 
-                                    type="button" 
-                                    wire:click="$set('jobTitleIds', {{ json_encode(array_values(array_diff($jobTitleIds, [$jobTitle->id]))) }})"
-                                    class="filter-remove"
-                                >×</button>
-                            </span>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
-
-            <!-- Skills Filter -->
-            <div class="form-group">
-                <label for="skills" class="form-label">Skills</label>
-                <select 
-                    id="skills"
-                    wire:model.live="skillIds"
-                    class="form-select"
-                    multiple
-                    size="1"
-                >
-                    @foreach($skills as $skill)
-                        <option value="{{ $skill->id }}">{{ $skill->name }}</option>
-                    @endforeach
-                </select>
-                @if(!empty($skillIds))
-                    <div class="selected-filters">
-                        @foreach($skills->whereIn('id', $skillIds) as $skill)
-                            <span class="filter-badge">
-                                {{ $skill->name }}
-                                <button 
-                                    type="button" 
-                                    wire:click="$set('skillIds', {{ json_encode(array_values(array_diff($skillIds, [$skill->id]))) }})"
-                                    class="filter-remove"
-                                >×</button>
-                            </span>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
-
-            <!-- Min Experience -->
-            <div class="form-group">
-                <label for="minExperience" class="form-label">Min Experience</label>
-                <input 
-                    type="number" 
-                    id="minExperience"
-                    wire:model.live.debounce.300ms="minExperience" 
-                    placeholder="0"
-                    min="0"
-                    class="form-input"
-                >
-            </div>
-
-            <!-- Max Experience -->
-            <div class="form-group">
-                <label for="maxExperience" class="form-label">Max Experience</label>
-                <input 
-                    type="number" 
-                    id="maxExperience"
-                    wire:model.live.debounce.300ms="maxExperience" 
-                    placeholder="50"
-                    min="0"
-                    class="form-input"
-                >
-            </div>
-        </div>
-
-        <!-- Available Only & Clear Filters -->
-        <div class="search-footer">
-            <label class="checkbox-label">
-                <input 
-                    type="checkbox" 
-                    wire:model.live="availableOnly"
-                    class="checkbox-input"
-                >
-                <span class="checkbox-text">Available only</span>
-            </label>
-
+        <div class="search-footer" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
             <button 
+                type="button"
                 wire:click="clearFilters"
                 class="btn-link"
             >
