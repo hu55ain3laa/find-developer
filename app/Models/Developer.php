@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\IraqiGovernorate;
 use App\Enums\SubscriptionPlan;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +42,7 @@ class Developer extends Model
         'is_available' => 'boolean',
         'status' => DeveloperStatus::class,
         'subscription_plan' => SubscriptionPlan::class,
+        'location' => IraqiGovernorate::class,
     ];
 
     public function jobTitle(): BelongsTo

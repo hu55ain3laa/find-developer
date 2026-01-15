@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Developers\Schemas;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\IraqiGovernorate;
 use App\Enums\SubscriptionPlan;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
@@ -33,8 +34,9 @@ class DeveloperForm
                             ->tel()
                             ->maxLength(255),
 
-                        TextInput::make('location')
-                            ->maxLength(255),
+                        Select::make('location')
+                            ->options(IraqiGovernorate::class)
+                            ->searchable(),
                     ])
                     ->columns(2),
 

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\IraqiGovernorate;
 use App\Enums\SubscriptionPlan;
 use App\Models\Developer;
 use App\Models\JobTitle;
@@ -29,7 +30,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://johnsmith.dev',
                     'github_url' => 'https://github.com/johnsmith',
                     'linkedin_url' => 'https://linkedin.com/in/johnsmith',
-                    'location' => 'Baghdad, Iraq',
+                    'location' => IraqiGovernorate::BAGHDAD,
                     'expected_salary_from' => 195000000,
                     'expected_salary_to' => 234000000,
                     'is_available' => true,
@@ -49,7 +50,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://sarahjohnson.com',
                     'github_url' => 'https://github.com/sarahjohnson',
                     'linkedin_url' => 'https://linkedin.com/in/sarahjohnson',
-                    'location' => 'Erbil, Iraq',
+                    'location' => IraqiGovernorate::ERBIL,
                     'expected_salary_from' => 169000000,
                     'expected_salary_to' => 208000000,
                     'is_available' => true,
@@ -68,7 +69,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://michaelchen.dev',
                     'github_url' => 'https://github.com/michaelchen',
                     'linkedin_url' => 'https://linkedin.com/in/michaelchen',
-                    'location' => 'Basra, Iraq',
+                    'location' => IraqiGovernorate::BASRA,
                     'expected_salary_from' => 221000000,
                     'expected_salary_to' => 260000000,
                     'is_available' => true,
@@ -87,7 +88,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://emilyrodriguez.dev',
                     'github_url' => 'https://github.com/emilyrodriguez',
                     'linkedin_url' => 'https://linkedin.com/in/emilyrodriguez',
-                    'location' => 'Sulaymaniyah, Iraq',
+                    'location' => IraqiGovernorate::SULAYMANIYAH,
                     'expected_salary_from' => 182000000,
                     'expected_salary_to' => 221000000,
                     'is_available' => false,
@@ -106,7 +107,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://davidlee.tech',
                     'github_url' => 'https://github.com/davidlee',
                     'linkedin_url' => 'https://linkedin.com/in/davidlee',
-                    'location' => 'Najaf, Iraq',
+                    'location' => IraqiGovernorate::NAJAF,
                     'expected_salary_from' => 208000000,
                     'expected_salary_to' => 247000000,
                     'is_available' => true,
@@ -124,7 +125,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://jessicabrown.design',
                     'github_url' => 'https://github.com/jessicabrown',
                     'linkedin_url' => 'https://linkedin.com/in/jessicabrown',
-                    'location' => 'Karbala, Iraq',
+                    'location' => IraqiGovernorate::KARBALA,
                     'expected_salary_from' => 156000000,
                     'expected_salary_to' => 195000000,
                     'is_available' => true,
@@ -142,7 +143,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://robertmartinez.dev',
                     'github_url' => 'https://github.com/robertmartinez',
                     'linkedin_url' => 'https://linkedin.com/in/robertmartinez',
-                    'location' => 'Mosul, Iraq',
+                    'location' => IraqiGovernorate::NINEVEH,
                     'expected_salary_from' => 104000000,
                     'expected_salary_to' => 130000000,
                     'is_available' => true,
@@ -160,7 +161,7 @@ class DevelopersSeeder extends Seeder
                     'portfolio_url' => 'https://amandataylor.dev',
                     'github_url' => 'https://github.com/amandataylor',
                     'linkedin_url' => 'https://linkedin.com/in/amandataylor',
-                    'location' => 'Kirkuk, Iraq',
+                    'location' => IraqiGovernorate::KIRKUK,
                     'expected_salary_from' => 260000000,
                     'expected_salary_to' => 325000000,
                     'is_available' => true,

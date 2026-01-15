@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\IraqiGovernorate;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
@@ -65,9 +66,9 @@ class DeveloperRegistration extends SimplePage implements HasForms
                             ->tel()
                             ->maxLength(255),
 
-                        TextInput::make('location')
-                            ->maxLength(255)
-                            ->placeholder('e.g., Baghdad, Iraq'),
+                        Select::make('location')
+                            ->options(IraqiGovernorate::class)
+                            ->searchable(),
                     ])
                     ->columns(2),
 
