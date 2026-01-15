@@ -5,20 +5,69 @@
         <p class="page-subtitle">Search from our pool of talented developers</p>
     </div>
 
-    <!-- Search & Filter Section -->
-    <div class="search-card">
-        <form wire:submit="search">
-            {{ $this->form }}
-        </form>
+    <!-- Floating Search Button -->
+    <div x-data="{ isOpen: false }" class="search-container">
+        <!-- Floating Button -->
+        <button 
+            @click="isOpen = true"
+            x-show="!isOpen"
+            x-transition
+            class="search-floating-btn"
+            type="button"
+            aria-label="Open search filters"
+        >
+            <svg class="search-btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span class="search-btn-text">Filters</span>
+        </button>
 
-        <div class="search-footer" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
-            <button 
-                type="button"
-                wire:click="clearFilters"
-                class="btn-link"
-            >
-                Clear all filters
-            </button>
+        <!-- Slide-in Search Panel with Backdrop -->
+        <div 
+            x-show="isOpen"
+            x-cloak
+            @click.away="isOpen = false"
+            @keydown.escape.window="isOpen = false"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="translate-x-full opacity-0"
+            x-transition:enter-end="translate-x-0 opacity-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="translate-x-0 opacity-100"
+            x-transition:leave-end="translate-x-full opacity-0"
+            class="search-slide-panel"
+        >
+            <div class="search-card" @click.stop>
+                <!-- Header with Close Button -->
+                <div class="search-card-header">
+                    <h3 class="search-card-title">Search & Filters</h3>
+                    <button 
+                        @click="isOpen = false"
+                        class="search-close-btn"
+                        type="button"
+                        aria-label="Close search filters"
+                    >
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Form -->
+                <form wire:submit="search">
+                    {{ $this->form }}
+                </form>
+
+                <!-- Footer -->
+                <div class="search-footer">
+                    <button 
+                        type="button"
+                        wire:click="clearFilters"
+                        class="btn-link"
+                    >
+                        Clear all filters
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

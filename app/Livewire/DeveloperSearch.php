@@ -46,7 +46,6 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             ->components([
                 Section::make('Filters')
                     ->collapsible()
-                    ->collapsed()
                     ->description('Filter developers by various criteria')
                     ->schema([
                         TextInput::make('search')
