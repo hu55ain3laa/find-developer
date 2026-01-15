@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Models;
+
+use App\Enums\DeveloperStatus;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Scopes\ApprovedScope;
+
+class Developer extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'job_title_id',
+        'years_of_experience',
+        'bio',
+        'portfolio_url',
+        'github_url',
+        'linkedin_url',
+        'location',
+        'expected_salary_from',
+        'expected_salary_to',
+        'is_available',
+        'status',
+    ];
+
+    protected $casts = [
+        'years_of_experience' => 'integer',
+        'expected_salary_from' => 'integer',
+        'expected_salary_to' => 'integer',
+        'is_available' => 'boolean',
+        'status' => DeveloperStatus::class,
+    ];
+
+    public function jobTitle(): BelongsTo
+    {
+        return $this->belongsTo(JobTitle::class);
+    }
+
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class, 'developer_skill')
+            ->withTimestamps();
+    }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('is_available', true);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('status', DeveloperStatus::APPROVED);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', DeveloperStatus::PENDING);
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('status', DeveloperStatus::REJECTED);
+    }
+
+    public function scopeByExperience($query, $minYears, $maxYears = null)
+    {
+        $query->where('years_of_experience', '>=', $minYears);
+
+        if ($maxYears !== null) {
+            $query->where('years_of_experience', '<=', $maxYears);
+        }
+
+        return $query;
+    }
+}

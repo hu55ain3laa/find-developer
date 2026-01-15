@@ -1,11 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Find Developer
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Laravel application for finding and managing developers. Built with **Livewire** for the public interface and **Filament** for the admin dashboard.
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+composer install && npm install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations and seed data
+php artisan migrate --seed
+
+# Build assets and start server
+npm run build
+php artisan serve
+```
+
+Visit `http://localhost:8000` to see the application!
+
+## 📚 Complete Setup Guide
+
+For detailed installation instructions, features, and troubleshooting, see [SETUP_GUIDE.md](SETUP_GUIDE.md).
+
+## ✨ Features
+
+- 🔍 **Smart Search**: Search developers by name, email, location, skills, job title, and experience
+- 📊 **Admin Dashboard**: Full CRUD operations powered by Filament
+- ⚡ **Real-time Filtering**: Live search using Livewire
+- 🎨 **Modern UI**: Beautiful, responsive design with Tailwind CSS
+- 📱 **Mobile Friendly**: Works seamlessly on all devices
+
+## 🛠️ Tech Stack
+
+- **Laravel 12**: PHP framework
+- **Livewire 3**: Real-time frontend components
+- **Filament 4**: Admin panel
+- **Tailwind CSS**: Utility-first CSS framework
+- **SQLite**: Default database (easily switchable)
+
+## 📖 Usage
+
+### Public Interface
+- Browse and search for developers
+- Filter by job title and years of experience
+- View developer profiles with skills and contact info
+
+### Admin Dashboard (`/admin`)
+- Manage job titles
+- Add, edit, and delete developers
+- Advanced filtering and sorting
+
+**Create admin user:**
+```bash
+php artisan make:filament-user
+```
+
+## 📁 Project Structure
+
+```
+app/
+├── Filament/Resources/    # Admin resources
+├── Livewire/              # Livewire components
+└── Models/                # Eloquent models
+
+resources/
+├── views/                 # Blade templates
+├── css/                   # Tailwind CSS
+└── js/                    # JavaScript
+
+database/
+├── migrations/            # Database schema
+└── seeders/              # Sample data
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open-sourced software licensed under the MIT license.
+
+---
 
 ## About Laravel
 

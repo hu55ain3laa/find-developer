@@ -21,5 +21,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed skills first, then developers and job titles
+        $this->call([
+            SkillsSeeder::class,
+            DevelopersSeeder::class,
+        ]);
     }
 }
