@@ -65,6 +65,11 @@ class DevelopersTable
                     ->badge()
                     ->sortable(),
 
+                TextColumn::make('subscription_plan')
+                    ->label('Plan')
+                    ->badge()
+                    ->sortable(),
+
                 IconColumn::make('is_available')
                     ->label('Available')
                     ->boolean()

@@ -79,6 +79,12 @@ class DeveloperForm
                             ->default(DeveloperStatus::PENDING)
                             ->required(),
 
+                        Select::make('subscription_plan')
+                            ->label('Subscription Plan')
+                            ->options(SubscriptionPlan::class)
+                            ->default(SubscriptionPlan::FREE)
+                            ->required(),
+
                         Toggle::make('is_available')
                             ->label('Available for hire')
                             ->default(true)

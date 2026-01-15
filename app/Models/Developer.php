@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\SubscriptionPlan;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,7 @@ class Developer extends Model
         'expected_salary_to',
         'is_available',
         'status',
+        'subscription_plan',
     ];
 
     protected $casts = [
@@ -38,6 +40,7 @@ class Developer extends Model
         'expected_salary_to' => 'integer',
         'is_available' => 'boolean',
         'status' => DeveloperStatus::class,
+        'subscription_plan' => SubscriptionPlan::class,
     ];
 
     public function jobTitle(): BelongsTo

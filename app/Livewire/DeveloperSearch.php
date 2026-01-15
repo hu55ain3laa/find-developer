@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\SubscriptionPlan;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
@@ -74,7 +75,7 @@ class DeveloperSearch extends Component
             ->orderBy('name')
             ->get();
 
-        $developers = Developer::query()
+        $baseQuery = Developer::query()
             ->with(['jobTitle', 'skills'])
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
@@ -102,12 +103,31 @@ class DeveloperSearch extends Component
             })
             ->when($this->availableOnly, function ($query) {
                 $query->where('is_available', true);
-            })
+            });
+
+        // Get developers by subscription plan
+        $premiumDevelopers = (clone $baseQuery)
+            ->where('subscription_plan', SubscriptionPlan::PREMIUM)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $proDevelopers = (clone $baseQuery)
+            ->where('subscription_plan', SubscriptionPlan::PRO)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $freeDevelopers = (clone $baseQuery)
+            ->where('subscription_plan', SubscriptionPlan::FREE)
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
+        $totalCount = $premiumDevelopers->count() + $proDevelopers->count() + $freeDevelopers->total();
+
         return view('livewire.developer-search', [
-            'developers' => $developers,
+            'premiumDevelopers' => $premiumDevelopers,
+            'proDevelopers' => $proDevelopers,
+            'freeDevelopers' => $freeDevelopers,
+            'totalCount' => $totalCount,
             'jobTitles' => $jobTitles,
             'skills' => $skills,
         ]);

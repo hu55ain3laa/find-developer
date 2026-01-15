@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\SubscriptionPlan;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
@@ -33,6 +34,7 @@ class DevelopersSeeder extends Seeder
                     'expected_salary_to' => 234000000,
                     'is_available' => true,
                     'status' => DeveloperStatus::APPROVED,
+                    'subscription_plan' => SubscriptionPlan::PREMIUM,
                 ],
                 'skills' => ['Laravel', 'Vue.js', 'React', 'Node.js', 'MySQL', 'AWS'],
             ],
@@ -51,6 +53,7 @@ class DevelopersSeeder extends Seeder
                     'expected_salary_from' => 169000000,
                     'expected_salary_to' => 208000000,
                     'is_available' => true,
+                    'subscription_plan' => SubscriptionPlan::PRO,
                 ],
                 'skills' => ['React', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Figma'],
             ],
@@ -69,6 +72,7 @@ class DevelopersSeeder extends Seeder
                     'expected_salary_from' => 221000000,
                     'expected_salary_to' => 260000000,
                     'is_available' => true,
+                    'subscription_plan' => SubscriptionPlan::PREMIUM,
                 ],
                 'skills' => ['PHP', 'Laravel', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes'],
             ],
@@ -87,6 +91,7 @@ class DevelopersSeeder extends Seeder
                     'expected_salary_from' => 182000000,
                     'expected_salary_to' => 221000000,
                     'is_available' => false,
+                    'subscription_plan' => SubscriptionPlan::PRO,
                 ],
                 'skills' => ['React Native', 'Flutter', 'iOS Development', 'Android Development'],
             ],
