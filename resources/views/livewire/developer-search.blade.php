@@ -140,7 +140,7 @@
                         @endif
 
                         <div class="detail-item">
-                            @if($developer->is_available)
+                            {{-- @if($developer->is_available)
                                 <span class="availability-available">
                                     <svg class="detail-icon" fill="currentColor" viewBox="0 0 20 20" style="display: inline-block; vertical-align: middle;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -154,7 +154,7 @@
                                     </svg>
                                     Not Available
                                 </span>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
 
@@ -167,15 +167,26 @@
 
                     <!-- Skills -->
                     @if($developer->skills->count() > 0)
-                        <div class="skills-container">
-                            @foreach($developer->skills->take(5) as $skill)
-                                <span class="skill-tag">
+                        <div x-data="{ expanded: false }" class="skills-container">
+                            @foreach($developer->skills as $index => $skill)
+                                <span 
+                                    class="skill-tag"
+                                    x-show="expanded || {{ $index }} < 5"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 transform scale-95"
+                                    x-transition:enter-end="opacity-100 transform scale-100"
+                                >
                                     {{ $skill->name }}
                                 </span>
                             @endforeach
                             @if($developer->skills->count() > 5)
-                                <span class="skill-tag">
-                                    +{{ $developer->skills->count() - 5 }} more
+                                <span 
+                                    class="skill-tag skill-tag-more" 
+                                    @click="expanded = !expanded"
+                                    style="cursor: pointer;"
+                                >
+                                    <span x-show="!expanded">+{{ $developer->skills->count() - 5 }} more</span>
+                                    <span x-show="expanded" x-cloak>Show less</span>
                                 </span>
                             @endif
                         </div>
