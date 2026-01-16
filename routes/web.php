@@ -8,3 +8,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/register', DeveloperRegistration::class)->name('register');
+
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');

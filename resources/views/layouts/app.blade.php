@@ -31,6 +31,9 @@
                     FindDeveloper
                 </a>
                         <div class="navbar-menu">
+                            <a href="{{ route('pricing') }}" class="navbar-link">
+                                Pricing
+                            </a>
                             <a href="{{ route('register') }}" class="navbar-link">
                                 Register as Developer
                             </a>
