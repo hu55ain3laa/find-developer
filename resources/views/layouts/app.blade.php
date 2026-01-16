@@ -25,22 +25,50 @@
     </head>
     <body>
         <!-- Navigation -->
-        <nav class="navbar">
+        <nav class="navbar" x-data="{ mobileMenuOpen: false }">
             <div class="navbar-container">
                 <a href="{{ url('/') }}" class="navbar-brand">
                     FindDeveloper
                 </a>
-                        <div class="navbar-menu">
-                            <a href="{{ route('pricing') }}" class="navbar-link">
-                                Pricing
-                            </a>
-                            <a href="{{ route('about') }}" class="navbar-link">
-                                About Us
-                            </a>
-                            <a href="{{ route('register') }}" class="navbar-link">
-                                Register as Developer
-                            </a>
-                        </div>
+                
+                <!-- Hamburger Button -->
+                <button 
+                    @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="navbar-toggle"
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    x-bind:aria-expanded="mobileMenuOpen"
+                >
+                    <span class="navbar-toggle-icon" x-bind:class="{ 'active': mobileMenuOpen }">
+                        <span class="navbar-toggle-line"></span>
+                        <span class="navbar-toggle-line"></span>
+                        <span class="navbar-toggle-line"></span>
+                    </span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <div 
+                    class="navbar-menu"
+                    x-show="mobileMenuOpen"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    @click.away="mobileMenuOpen = false"
+                >
+                    <a href="{{ route('pricing') }}" class="navbar-link" @click="mobileMenuOpen = false">
+                        Pricing
+                    </a>
+                    <a href="{{ route('about') }}" class="navbar-link" @click="mobileMenuOpen = false">
+                        About Us
+                    </a>
+                    <a href="{{ route('register') }}" class="navbar-link" @click="mobileMenuOpen = false">
+                        Register as Developer
+                    </a>
+                </div>
             </div>
         </nav>
 
