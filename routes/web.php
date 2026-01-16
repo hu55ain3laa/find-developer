@@ -12,3 +12,7 @@ Route::get('/register', DeveloperRegistration::class)->name('register');
 Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
