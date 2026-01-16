@@ -5,6 +5,8 @@ namespace App\Filament\Pages;
 use App\Enums\DeveloperStatus;
 use App\Enums\WorldGovernorate;
 use App\Enums\SalaryCurrency;
+use App\Filament\Customs\ExpectedSalaryFromField;
+use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
@@ -20,7 +22,6 @@ use Filament\Pages\SimplePage;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Enums\Width;
 use Filament\Actions\Action;
-use Filament\Support\RawJs;
 
 class DeveloperRegistration extends SimplePage implements HasForms
 {
@@ -90,21 +91,9 @@ class DeveloperRegistration extends SimplePage implements HasForms
                             ->suffix('years')
                             ->required(),
 
-                        TextInput::make('expected_salary_from')
-                            ->mask(RawJs::make('$money($input)'))
-                            ->stripCharacters(',')
-                            ->label('Expected Salary From')
-                            ->lt('expected_salary_to')
-                            ->regex('/^\d+$/')
-                            ->minValue(0),
+                        ExpectedSalaryFromField::make(),
 
-                        TextInput::make('expected_salary_to')
-                            ->mask(RawJs::make('$money($input)'))
-                            ->stripCharacters(',')
-                            ->label('Expected Salary To')
-                            ->gt('expected_salary_from')
-                            ->regex('/^\d+$/')
-                            ->minValue(0),
+                        ExpectedSalaryToField::make(),
 
                         Select::make('salary_currency')
                             ->label('Salary Currency')

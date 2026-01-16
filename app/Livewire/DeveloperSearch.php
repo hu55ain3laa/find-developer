@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\SalaryCurrency;
 use App\Enums\WorldGovernorate;
 use App\Enums\SubscriptionPlan;
+use App\Filament\Customs\ExpectedSalaryFromField;
+use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use App\Models\Skill;
@@ -20,6 +23,7 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class DeveloperSearch extends Component implements HasSchemas, HasActions
 {
@@ -38,6 +42,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             'locationIds' => [],
             'minExperience' => null,
             'maxExperience' => null,
+            'expected_salary_from' => null,
+            'expected_salary_to' => null,
+            'salary_currency' => null,
             'availableOnly' => true,
         ];
     }
@@ -103,6 +110,21 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->placeholder('50')
                                     ->live(debounce: 300)
                                     ->afterStateUpdated(fn() => $this->resetPage()),
+
+                                ExpectedSalaryFromField::make()
+                                    ->live(debounce: 300)
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
+
+                                ExpectedSalaryToField::make()
+                                    ->live(debounce: 300)
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
+
+                                Select::make('salary_currency')
+                                    ->label('Salary Currency')
+                                    ->options(SalaryCurrency::class)
+                                    ->searchable()
+                                    ->live()
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
                             ]),
 
                         Checkbox::make('availableOnly')
@@ -124,6 +146,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             'locationIds' => [],
             'minExperience' => null,
             'maxExperience' => null,
+            'expected_salary_from' => null,
+            'expected_salary_to' => null,
+            'salary_currency' => null,
             'availableOnly' => true,
         ];
         $this->resetPage();
@@ -162,6 +187,18 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             })
             ->when(!empty($filters['maxExperience']), function ($query) use ($filters) {
                 $query->where('years_of_experience', '<=', $filters['maxExperience']);
+            })
+            ->when(!empty($filters['expected_salary_from']) && $filters['expected_salary_to'] === null, function ($query) use ($filters) {
+                $query->where('expected_salary_from', '>=',  Str::of($filters['expected_salary_from'])->replace(',', '')->toInteger());
+            })
+            ->when(!empty($filters['expected_salary_to']) && $filters['expected_salary_from'] === null, function ($query) use ($filters) {
+                $query->where('expected_salary_to', '<=', Str::of($filters['expected_salary_to'])->replace(',', '')->toInteger());
+            })
+            ->when(!empty($filters['expected_salary_from']) && !empty($filters['expected_salary_to']), function ($query) use ($filters) {
+                $query->whereBetween('expected_salary_from', [Str::of($filters['expected_salary_from'])->replace(',', '')->toInteger(), Str::of($filters['expected_salary_to'])->replace(',', '')->toInteger()]);
+            })
+            ->when(!empty($filters['salary_currency']), function ($query) use ($filters) {
+                $query->where('salary_currency', $filters['salary_currency']);
             })
             ->where('is_available', $filters['availableOnly']);
 

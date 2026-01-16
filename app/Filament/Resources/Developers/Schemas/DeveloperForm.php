@@ -6,6 +6,8 @@ use App\Enums\DeveloperStatus;
 use App\Enums\WorldGovernorate;
 use App\Enums\SalaryCurrency;
 use App\Enums\SubscriptionPlan;
+use App\Filament\Customs\ExpectedSalaryFromField;
+use App\Filament\Customs\ExpectedSalaryToField;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -13,7 +15,6 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TagsInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Support\RawJs;
 
 class DeveloperForm
 {
@@ -65,19 +66,9 @@ class DeveloperForm
                             ->suffix('years')
                             ->required(),
 
-                        TextInput::make('expected_salary_from')
-                            ->label('Expected Salary From')
-                            ->mask(RawJs::make('$money($input)'))
-                            ->stripCharacters(',')
-                            ->regex('/^\d+$/')
-                            ->minValue(0),
+                        ExpectedSalaryFromField::make(),
 
-                        TextInput::make('expected_salary_to')
-                            ->label('Expected Salary To')
-                            ->mask(RawJs::make('$money($input)'))
-                            ->stripCharacters(',')
-                            ->regex('/^\d+$/')
-                            ->minValue(0),
+                        ExpectedSalaryToField::make(),
 
                         Select::make('salary_currency')
                             ->label('Salary Currency')
