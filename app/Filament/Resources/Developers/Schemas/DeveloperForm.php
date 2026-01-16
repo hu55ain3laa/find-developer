@@ -13,6 +13,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TagsInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\RawJs;
 
 class DeveloperForm
 {
@@ -66,14 +67,14 @@ class DeveloperForm
 
                         TextInput::make('expected_salary_from')
                             ->label('Expected Salary From')
-                            ->numeric()
-                            ->step(1000)
+                            ->mask(RawJs::make('$money($input)'))
+                            ->stripCharacters(',')
                             ->minValue(0),
 
                         TextInput::make('expected_salary_to')
                             ->label('Expected Salary To')
-                            ->numeric()
-                            ->step(1000)
+                            ->mask(RawJs::make('$money($input)'))
+                            ->stripCharacters(',')
                             ->minValue(0),
 
                         Select::make('salary_currency')

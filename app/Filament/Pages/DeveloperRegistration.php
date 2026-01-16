@@ -20,6 +20,7 @@ use Filament\Pages\SimplePage;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Enums\Width;
 use Filament\Actions\Action;
+use Filament\Support\RawJs;
 
 class DeveloperRegistration extends SimplePage implements HasForms
 {
@@ -90,15 +91,17 @@ class DeveloperRegistration extends SimplePage implements HasForms
                             ->required(),
 
                         TextInput::make('expected_salary_from')
+                            ->mask(RawJs::make('$money($input)'))
+                            ->stripCharacters(',')
                             ->label('Expected Salary From')
-                            ->numeric()
-                            ->step(1000)
+                            ->lt('expected_salary_to')
                             ->minValue(0),
 
                         TextInput::make('expected_salary_to')
+                            ->mask(RawJs::make('$money($input)'))
+                            ->stripCharacters(',')
                             ->label('Expected Salary To')
-                            ->numeric()
-                            ->step(1000)
+                            ->gt('expected_salary_from')
                             ->minValue(0),
 
                         Select::make('salary_currency')
