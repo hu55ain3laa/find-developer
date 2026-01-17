@@ -44,7 +44,7 @@ class JobTitlePolicy
      */
     public function delete(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('Delete:JobTitles') || $user->isSuperAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**

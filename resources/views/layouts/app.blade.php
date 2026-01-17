@@ -74,6 +74,8 @@
         @filamentStyles
 
         @livewireStyles
+
+        @stack('styles')
     </head>
     <body>
         <!-- Navigation -->

@@ -28,7 +28,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Create:Roles');
+        return $user->can('Create:Roles') || $user->isSuperAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role): bool
     {
-        return $user->can('Update:Roles');
+        return $user->can('Update:Roles') || $user->isSuperAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role): bool
     {
-        return $user->can('Delete:Roles');
+        return $user->isSuperAdmin();
     }
 
     /**
@@ -52,7 +52,7 @@ class RolePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('DeleteAny:Roles');
+        return $user->can('DeleteAny:Roles') || $user->isSuperAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role): bool
     {
-        return $user->can('Restore:Roles');
+        return $user->can('Restore:Roles') || $user->isSuperAdmin();
     }
 
     /**
@@ -68,6 +68,6 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role): bool
     {
-        return $user->can('ForceDelete:Roles');
+        return $user->can('ForceDelete:Roles') || $user->isSuperAdmin();
     }
 }

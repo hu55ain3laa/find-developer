@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Pages\DeveloperRegistration;
+use App\Http\Controllers\DeveloperProjectsController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,6 @@ Route::get('/robots.txt', function () {
     return response("User-agent: *\nAllow: /\n\nSitemap: " . url('/sitemap.xml'), 200)
         ->header('Content-Type', 'text/plain');
 })->name('robots');
+
+Route::get('/developer/{id}/projects', [DeveloperProjectsController::class, 'show'])
+    ->name('developer.projects');

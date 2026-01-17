@@ -44,7 +44,7 @@ class DeveloperProjectPolicy
      */
     public function delete(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('Delete:DeveloperProject') || $user->isSuperAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**

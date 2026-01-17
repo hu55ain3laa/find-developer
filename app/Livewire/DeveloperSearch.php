@@ -163,10 +163,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
     {
         $filters = $this->filterData;
 
-        $baseQuery = Developer::query()
-            ->with(['jobTitle', 'skills'])
+        $baseQuery = Developer::with(['jobTitle', 'skills'])
             ->with(['projects' => function ($query) {
-                $query->withoutGlobalScopes([DeveloperScope::class]);
+                $query->withoutGlobalScopes([DeveloperScope::class])->limit(6)->orderBy('created_at', 'desc');
             }])
             ->withCount(['projects' => function ($query) {
                 $query->withoutGlobalScopes([DeveloperScope::class]);
@@ -227,6 +226,7 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             ->where('subscription_plan', SubscriptionPlan::FREE)
             ->orderBy('created_at', 'desc')
             ->paginate(15);
+
 
         $totalCount = $premiumDevelopers->count() + $proDevelopers->count() + $freeDevelopers->total();
 

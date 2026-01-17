@@ -41,6 +41,10 @@ class Developer extends Model
         'subscription_plan',
     ];
 
+    protected $hidden = [
+        'phone',
+    ];
+
     protected $casts = [
         'years_of_experience' => 'integer',
         'expected_salary_from' => 'integer',

@@ -44,7 +44,7 @@ class DeveloperPolicy
      */
     public function delete(User $user, Developer $developer): bool
     {
-        return $user->can('Delete:Developers') || $user->isSuperAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**

@@ -248,6 +248,12 @@
                             </svg>
                             <span>Can display 6 projects directly into your card</span>
                         </li>
+                        <li class="pricing-feature">
+                            <svg class="pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>We will provide a developer projects page for you only</span>
+                        </li>
                     </ul>
                     <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Premium%20plan" 
                        target="_blank" 

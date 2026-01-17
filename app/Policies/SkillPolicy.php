@@ -44,7 +44,7 @@ class SkillPolicy
      */
     public function delete(User $user, Skill $skill): bool
     {
-        return $user->can('Delete:Skills') || $user->isSuperAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**

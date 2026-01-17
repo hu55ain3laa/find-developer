@@ -43,7 +43,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->can('Delete:Users') || $user->isSuperAdmin();
+        return $user->isSuperAdmin();
     }
 
     /**
