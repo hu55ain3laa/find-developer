@@ -10,6 +10,7 @@ use App\Filament\Customs\ExpectedSalaryFromField;
 use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
 use App\Models\JobTitle;
+use App\Models\Scopes\DeveloperScope;
 use App\Models\Skill;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -163,10 +164,13 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
         $filters = $this->filterData;
 
         $baseQuery = Developer::query()
-            ->with(['jobTitle', 'skills', 'projects' => function ($query) {
-                $query->withoutGlobalScopes();
+            ->with(['jobTitle', 'skills'])
+            ->with(['projects' => function ($query) {
+                $query->withoutGlobalScopes([DeveloperScope::class]);
             }])
-            ->withCount('projects')
+            ->withCount(['projects' => function ($query) {
+                $query->withoutGlobalScopes([DeveloperScope::class]);
+            }])
             ->when(!empty($filters['search']), function ($query) use ($filters) {
                 $query->where(function ($q) use ($filters) {
                     $q->where('name', 'like', '%' . $filters['search'] . '%')
