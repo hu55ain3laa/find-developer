@@ -5,6 +5,7 @@ namespace App\Filament\Resources\DeveloperProjects\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -16,28 +17,18 @@ class DeveloperProjectForm
             ->components([
                 Section::make('Project Information')
                     ->description('Add or edit project details')
+                    ->columnSpanFull()
                     ->schema([
-                        Select::make('developer_id')
-                            ->label('Developer')
-                            ->relationship('developer', 'name')
-                            ->required()
-                            ->searchable()
-                            ->preload()
-                            ->createOptionForm([
-                                TextInput::make('name')
+                        Grid::make(2)
+                            ->schema([
+                                TextInput::make('title')
                                     ->required()
                                     ->maxLength(255),
-                                TextInput::make('email')
-                                    ->email()
-                                    ->required()
-                                    ->maxLength(255),
+
+                                self::getDeveloperField(),
+
+
                             ]),
-
-                        TextInput::make('title')
-                            ->required()
-                            ->maxLength(255)
-                            ->columnSpanFull(),
-
                         Textarea::make('description')
                             ->rows(4)
                             ->columnSpanFull(),
@@ -48,8 +39,32 @@ class DeveloperProjectForm
                             ->maxLength(255)
                             ->prefixIcon('heroicon-o-link')
                             ->columnSpanFull(),
-                    ])
-                    ->columns(2),
+                    ]),
+            ]);
+    }
+
+    public static function getDeveloperField()
+    {
+        if (auth()->user()->isDeveloper()) {
+            return;
+        }
+
+        return Select::make('developer_id')
+            ->label('Developer')
+            ->relationship('developer', 'name')
+            ->required()
+            ->searchable()
+            ->default(auth()->user()->developer?->id)
+            ->disabled(auth()->user()->isDeveloper())
+            ->preload()
+            ->createOptionForm([
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 }

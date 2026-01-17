@@ -48,13 +48,7 @@ class DeveloperProjectsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('developer_id')
-                    ->label('Developer')
-                    ->relationship('developer', 'name')
-                    ->searchable()
-                    ->preload(),
-            ])
+            ->filters([])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),

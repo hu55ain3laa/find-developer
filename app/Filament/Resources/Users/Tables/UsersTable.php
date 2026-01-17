@@ -31,6 +31,12 @@ class UsersTable
                     ->copyMessage('Email copied!')
                     ->copyMessageDuration(1500),
 
+                TextColumn::make('user_type')
+                    ->label('User Type')
+                    ->badge()
+                    ->sortable()
+                    ->searchable(),
+
                 TextColumn::make('roles.name')
                     ->badge()
                     ->separator(','),

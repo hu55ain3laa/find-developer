@@ -19,10 +19,5 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        Gate::before(function (User $user) {
-            return in_array($user->email, explode(',', config('app.super_admin_emails')));
-        });
-    }
+    public function boot(): void {}
 }

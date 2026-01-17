@@ -12,7 +12,7 @@ class DeveloperProjectPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:DeveloperProjects');
+        return $user->can('ViewAny:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -20,7 +20,7 @@ class DeveloperProjectPolicy
      */
     public function view(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('View:DeveloperProjects');
+        return $user->can('View:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class DeveloperProjectPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Create:DeveloperProjects');
+        return $user->can('Create:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class DeveloperProjectPolicy
      */
     public function update(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('Update:DeveloperProjects');
+        return $user->can('Update:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class DeveloperProjectPolicy
      */
     public function delete(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('Delete:DeveloperProjects');
+        return $user->can('Delete:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -52,7 +52,7 @@ class DeveloperProjectPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('DeleteAny:DeveloperProjects');
+        return $user->can('DeleteAny:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class DeveloperProjectPolicy
      */
     public function restore(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('Restore:DeveloperProjects');
+        return $user->can('Restore:DeveloperProject') || $user->isSuperAdmin();
     }
 
     /**
@@ -68,6 +68,6 @@ class DeveloperProjectPolicy
      */
     public function forceDelete(User $user, DeveloperProject $developerProject): bool
     {
-        return $user->can('ForceDelete:DeveloperProjects');
+        return $user->can('ForceDelete:DeveloperProject') || $user->isSuperAdmin();
     }
 }

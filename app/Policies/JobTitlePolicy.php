@@ -12,7 +12,7 @@ class JobTitlePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:JobTitles');
+        return $user->can('ViewAny:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -20,7 +20,7 @@ class JobTitlePolicy
      */
     public function view(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('View:JobTitles');
+        return $user->can('View:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class JobTitlePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Create:JobTitles');
+        return $user->can('Create:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class JobTitlePolicy
      */
     public function update(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('Update:JobTitles');
+        return $user->can('Update:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class JobTitlePolicy
      */
     public function delete(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('Delete:JobTitles');
+        return $user->can('Delete:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -52,7 +52,7 @@ class JobTitlePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('DeleteAny:JobTitles');
+        return $user->can('DeleteAny:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class JobTitlePolicy
      */
     public function restore(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('Restore:JobTitles');
+        return $user->can('Restore:JobTitles') || $user->isSuperAdmin();
     }
 
     /**
@@ -68,6 +68,6 @@ class JobTitlePolicy
      */
     public function forceDelete(User $user, JobTitle $jobTitle): bool
     {
-        return $user->can('ForceDelete:JobTitles');
+        return $user->can('ForceDelete:JobTitles') || $user->isSuperAdmin();
     }
 }

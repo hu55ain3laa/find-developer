@@ -12,7 +12,7 @@ class SkillPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:Skills');
+        return $user->can('ViewAny:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -20,7 +20,7 @@ class SkillPolicy
      */
     public function view(User $user, Skill $skill): bool
     {
-        return $user->can('View:Skills');
+        return $user->can('View:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class SkillPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Create:Skills');
+        return $user->can('Create:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class SkillPolicy
      */
     public function update(User $user, Skill $skill): bool
     {
-        return $user->can('Update:Skills');
+        return $user->can('Update:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class SkillPolicy
      */
     public function delete(User $user, Skill $skill): bool
     {
-        return $user->can('Delete:Skills');
+        return $user->can('Delete:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -52,7 +52,7 @@ class SkillPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('DeleteAny:Skills');
+        return $user->can('DeleteAny:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class SkillPolicy
      */
     public function restore(User $user, Skill $skill): bool
     {
-        return $user->can('Restore:Skills');
+        return $user->can('Restore:Skills') || $user->isSuperAdmin();
     }
 
     /**
@@ -68,6 +68,6 @@ class SkillPolicy
      */
     public function forceDelete(User $user, Skill $skill): bool
     {
-        return $user->can('ForceDelete:Skills');
+        return $user->can('ForceDelete:Skills') || $user->isSuperAdmin();
     }
 }

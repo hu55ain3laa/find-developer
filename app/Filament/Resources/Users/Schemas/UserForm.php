@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Enums\UserType;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
@@ -25,6 +27,13 @@ class UserForm
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
+
+                        Select::make('user_type')
+                            ->label('User Type')
+                            ->options(UserType::class)
+                            ->default(UserType::DEVELOPER)
+                            ->required()
+                            ->searchable(),
 
                         TextInput::make('password')
                             ->password()

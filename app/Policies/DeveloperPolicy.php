@@ -12,7 +12,7 @@ class DeveloperPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('ViewAny:Developers');
+        return $user->can('ViewAny:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -20,7 +20,7 @@ class DeveloperPolicy
      */
     public function view(User $user, Developer $developer): bool
     {
-        return $user->can('View:Developers');
+        return $user->can('View:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -28,7 +28,7 @@ class DeveloperPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('Create:Developers');
+        return $user->can('Create:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -36,7 +36,7 @@ class DeveloperPolicy
      */
     public function update(User $user, Developer $developer): bool
     {
-        return $user->can('Update:Developers');
+        return $user->can('Update:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -44,7 +44,7 @@ class DeveloperPolicy
      */
     public function delete(User $user, Developer $developer): bool
     {
-        return $user->can('Delete:Developers');
+        return $user->can('Delete:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -52,7 +52,7 @@ class DeveloperPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('DeleteAny:Developers');
+        return $user->can('DeleteAny:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -60,7 +60,7 @@ class DeveloperPolicy
      */
     public function restore(User $user, Developer $developer): bool
     {
-        return $user->can('Restore:Developers');
+        return $user->can('Restore:Developers') || $user->isSuperAdmin();
     }
 
     /**
@@ -68,6 +68,6 @@ class DeveloperPolicy
      */
     public function forceDelete(User $user, Developer $developer): bool
     {
-        return $user->can('ForceDelete:Developers');
+        return $user->can('ForceDelete:Developers') || $user->isSuperAdmin();
     }
 }
