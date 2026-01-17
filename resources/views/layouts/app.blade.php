@@ -5,7 +5,59 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Find Developer') }} - @yield('title', 'Find Your Perfect Developer')</title>
+        @php
+            $currentRoute = Route::currentRouteName();
+            $customSeo = [];
+            
+            if (View::hasSection('seo_title')) {
+                $customSeo['title'] = trim(View::yieldContent('seo_title'));
+            }
+            if (View::hasSection('seo_description')) {
+                $customSeo['description'] = trim(View::yieldContent('seo_description'));
+            }
+            if (View::hasSection('seo_keywords')) {
+                $customSeo['keywords'] = trim(View::yieldContent('seo_keywords'));
+            }
+            if (View::hasSection('seo_image')) {
+                $customSeo['image'] = trim(View::yieldContent('seo_image'));
+            }
+            
+            $customSeo['url'] = url()->current();
+            
+            $pageSeo = \App\Helpers\SeoHelper::getPageSeo($currentRoute ?? 'home', $customSeo);
+        @endphp
+
+        <!-- Primary Meta Tags -->
+        <title>{{ $pageSeo['title'] }}</title>
+        <meta name="title" content="{{ $pageSeo['title'] }}">
+        <meta name="description" content="{{ $pageSeo['description'] }}">
+        <meta name="keywords" content="{{ $pageSeo['keywords'] }}">
+        <meta name="author" content="FindDeveloper">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="English">
+        <meta name="revisit-after" content="7 days">
+        <link rel="canonical" href="{{ $pageSeo['url'] }}">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="{{ $pageSeo['type'] }}">
+        <meta property="og:url" content="{{ $pageSeo['url'] }}">
+        <meta property="og:title" content="{{ $pageSeo['title'] }}">
+        <meta property="og:description" content="{{ $pageSeo['description'] }}">
+        <meta property="og:image" content="{{ $pageSeo['image'] }}">
+        <meta property="og:site_name" content="{{ $pageSeo['site_name'] }}">
+        <meta property="og:locale" content="en_US">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{{ $pageSeo['url'] }}">
+        <meta name="twitter:title" content="{{ $pageSeo['title'] }}">
+        <meta name="twitter:description" content="{{ $pageSeo['description'] }}">
+        <meta name="twitter:image" content="{{ $pageSeo['image'] }}">
+
+        <!-- Additional SEO -->
+        <meta name="theme-color" content="#3b82f6">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -99,6 +151,19 @@
                 </p>
             </div>
         </footer>
+
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json">
+        {!! json_encode(\App\Helpers\SeoHelper::getOrganizationStructuredData(), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        <script type="application/ld+json">
+        {!! json_encode(\App\Helpers\SeoHelper::getWebsiteStructuredData(), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+        </script>
+        @hasSection('structured_data')
+            <script type="application/ld+json">
+            @yield('structured_data')
+            </script>
+        @endif
 
         @livewireScripts
         @filamentScripts

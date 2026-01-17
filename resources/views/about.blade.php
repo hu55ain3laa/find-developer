@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'About Us')
+@section('seo_title', 'About Us - FindDeveloper | Connecting Developers with Opportunities')
+@section('seo_description', 'Learn about FindDeveloper - a platform connecting skilled developers with clients and opportunities. Discover our mission and services.')
+@section('seo_keywords', 'about finddeveloper, developer platform, connect developers, developer marketplace, find developer iraq')
 
 @section('content')
     <div class="about-container">

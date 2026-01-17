@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Pages\DeveloperRegistration;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,3 +17,10 @@ Route::get('/plans', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+Route::get('/robots.txt', function () {
+    return response("User-agent: *\nAllow: /\n\nSitemap: " . url('/sitemap.xml'), 200)
+        ->header('Content-Type', 'text/plain');
+})->name('robots');
