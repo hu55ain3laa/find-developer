@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -39,6 +40,12 @@ class JobTitle extends Model
                 $jobTitle->slug = Str::slug($jobTitle->name);
             }
         });
+    }
+
+    #[Scope]
+    protected function active($query)
+    {
+        return $query->where('is_active', true);
     }
 
     public function developers(): HasMany

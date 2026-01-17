@@ -79,7 +79,7 @@ class DeveloperRegistration extends SimplePage implements HasForms
                     ->schema([
                         Select::make('job_title_id')
                             ->label('Job Title')
-                            ->options(JobTitle::where('is_active', true)->pluck('name', 'id'))
+                            ->options(JobTitle::active()->pluck('name', 'id'))
                             ->required()
                             ->searchable(),
 
@@ -109,7 +109,9 @@ class DeveloperRegistration extends SimplePage implements HasForms
 
                         Select::make('skills')
                             ->multiple()
-                            ->options(Skill::where('is_active', true)->pluck('name', 'id'))
+                            ->options(Skill::active()->limit(50)->pluck('name', 'id'))
+                            ->preload()
+                            ->getSearchResultsUsing(fn(string $query) => Skill::active()->where('name', 'like', '%' . $query . '%')->limit(50)->pluck('name', 'id'))
                             ->searchable()
                             ->columnSpanFull(),
                     ])

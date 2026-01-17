@@ -71,7 +71,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->label('Job Titles')
                                     ->multiple()
                                     ->searchable()
-                                    ->options(JobTitle::where('is_active', true)->pluck('name', 'id'))
+                                    ->options(JobTitle::active()->limit(50)->pluck('name', 'id'))
+                                    ->preload()
+                                    ->getSearchResultsUsing(fn(string $query) => JobTitle::active()->where('name', 'like', '%' . $query . '%')->limit(50)->pluck('name', 'id'))
                                     ->live()
                                     ->afterStateUpdated(fn() => $this->resetPage()),
 
@@ -79,7 +81,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->label('Skills')
                                     ->multiple()
                                     ->searchable()
-                                    ->options(Skill::where('is_active', true)->pluck('name', 'id'))
+                                    ->options(Skill::active()->limit(50)->pluck('name', 'id'))
+                                    ->preload()
+                                    ->getSearchResultsUsing(fn(string $query) => Skill::active()->where('name', 'like', '%' . $query . '%')->limit(50)->pluck('name', 'id'))
                                     ->live()
                                     ->afterStateUpdated(fn() => $this->resetPage()),
 
