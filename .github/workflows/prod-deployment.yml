@@ -30,9 +30,9 @@ jobs:
               exit 0
             fi
             cd /var/www/html/find-developer
-            sudo git fetch --tags
+            git fetch --tags
             echo "tag_name: ${{ github.event.release.tag_name }}"
-            sudo git checkout -B release-${{ github.event.release.tag_name }} refs/tags/${{ github.event.release.tag_name }}
+             git checkout -B release-${{ github.event.release.tag_name }} refs/tags/${{ github.event.release.tag_name }}
             sudo rm -f /var/www/gini-cars.au-uat.net/sooq/storage/logs/*.log
             composer install --no-dev --optimize-autoloader
             npm install --omit=dev
