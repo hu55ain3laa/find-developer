@@ -19,12 +19,14 @@ use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 
 class CompanyJobSearch extends Component implements HasSchemas
 {
     use WithPagination;
     use InteractsWithSchemas;
 
+    #[Url]
     public ?array $filterData = [];
 
     public function mount(): void

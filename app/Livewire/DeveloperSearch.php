@@ -25,6 +25,7 @@ use Filament\Schemas\Schema;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Url;
 
 class DeveloperSearch extends Component implements HasSchemas, HasActions
 {
@@ -32,6 +33,7 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
     use InteractsWithSchemas;
     use InteractsWithActions;
 
+    #[Url]
     public ?array $filterData = [];
 
     public function mount(): void
