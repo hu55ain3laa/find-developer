@@ -1568,11 +1568,12 @@ html.dark .dark-mode-icon.moon-icon {
         text-align: center;
         border-radius: var(--radius-md);
     }
-
-    .navbar-link:hover {
-        background: var(--bg-secondary);
-    }
     
+    .navbar-link-recommended {
+        justify-content: center;
+        width: 100%;
+    }
+
     .dark-mode-toggle {
         width: 100%;
         margin-top: var(--spacing-xs);
