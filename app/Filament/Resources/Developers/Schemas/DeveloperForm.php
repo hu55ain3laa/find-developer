@@ -114,6 +114,11 @@ class DeveloperForm
                             ->default(true)
                             ->required(),
 
+                        Toggle::make('recommended_by_us')
+                            ->label('Recommended By Us')
+                            ->default(false)
+                            ->helperText('Mark this developer as recommended by us'),
+
                         Textarea::make('bio')
                             ->rows(4)
                             ->columnSpanFull(),

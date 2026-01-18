@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
@@ -88,9 +89,12 @@ class DevelopersTable
                     ->badge()
                     ->sortable(),
 
-                IconColumn::make('is_available')
+                ToggleColumn::make('is_available')
                     ->label('Available')
-                    ->boolean()
+                    ->sortable(),
+
+                ToggleColumn::make('recommended_by_us')
+                    ->label('Recommended By Us')
                     ->sortable(),
 
                 TextColumn::make('created_at')
@@ -114,6 +118,13 @@ class DevelopersTable
                     ->boolean()
                     ->trueLabel('Available only')
                     ->falseLabel('Unavailable only')
+                    ->native(false),
+
+                TernaryFilter::make('recommended_by_us')
+                    ->label('Recommended By Us')
+                    ->boolean()
+                    ->trueLabel('Recommended only')
+                    ->falseLabel('Not recommended only')
                     ->native(false),
 
                 Filter::make('years_of_experience')

@@ -39,6 +39,7 @@ class Developer extends Model
         'expected_salary_to',
         'salary_currency',
         'is_available',
+        'recommended_by_us',
         'status',
         'subscription_plan',
     ];
@@ -52,6 +53,7 @@ class Developer extends Model
         'expected_salary_from' => 'integer',
         'expected_salary_to' => 'integer',
         'is_available' => 'boolean',
+        'recommended_by_us' => 'boolean',
         'status' => DeveloperStatus::class,
         'subscription_plan' => SubscriptionPlan::class,
         'location' => WorldGovernorate::class,
@@ -114,6 +116,11 @@ class Developer extends Model
     public function scopeRejected($query)
     {
         return $query->where('status', DeveloperStatus::REJECTED);
+    }
+
+    public function scopeRecommended($query)
+    {
+        return $query->where('recommended_by_us', true);
     }
 
     public function scopeByExperience($query, $minYears, $maxYears = null)
