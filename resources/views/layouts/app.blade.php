@@ -162,7 +162,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                         <p class="developer-promotion-banner-text">
-                            To make your profile good and increase the chance to hire/getting work you can do it with only <strong>10,000 IQD</strong> every month.
+                            To make your profile good and increase the chance to hire/getting work you can do it with only <strong>10,000 IQD</strong> 
                         </p>
                     </div>
                     <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20improve%20my%20developer%20profile" 
