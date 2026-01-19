@@ -6,6 +6,7 @@ use App\Enums\DeveloperStatus;
 use App\Enums\SalaryCurrency;
 use App\Enums\WorldGovernorate;
 use App\Enums\SubscriptionPlan;
+use App\Enums\AvailabilityType;
 use App\Filament\Customs\ExpectedSalaryFromField;
 use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
@@ -52,6 +53,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
     public int $expected_salary_to = 0;
     #[Url]
     public ?SalaryCurrency $salary_currency = null;
+
+    #[Url]
+    public array $availability_type = [];
 
     #[Url]
     public bool $availableOnly = true;
@@ -137,6 +141,15 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->searchable()
                                     ->live()
                                     ->afterStateUpdated(fn() => $this->resetPage()),
+
+                                Select::make('availability_type')
+                                    ->label('Availability Type')
+                                    ->options(AvailabilityType::class)
+                                    ->multiple()
+                                    ->searchable()
+                                    ->nullable()
+                                    ->live()
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
                             ]),
 
                         Checkbox::make('availableOnly')
@@ -205,6 +218,17 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             })
             ->when(!empty($filters['salary_currency']), function ($query) use ($filters) {
                 $query->where('salary_currency', $filters['salary_currency']);
+            })
+            ->when(!empty($filters['availability_type']), function ($query) use ($filters) {
+                $types = is_array($filters['availability_type'])
+                    ? $filters['availability_type']
+                    : [$filters['availability_type']];
+
+                $query->where(function ($q) use ($types) {
+                    foreach ($types as $type) {
+                        $q->orWhereJsonContains('availability_type', $type instanceof AvailabilityType ? $type->value : $type);
+                    }
+                });
             })
             ->where('is_available', $filters['availableOnly']);
 

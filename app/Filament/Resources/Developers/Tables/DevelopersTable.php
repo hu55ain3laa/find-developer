@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Developers\Tables;
 
 use App\Enums\DeveloperStatus;
+use App\Enums\AvailabilityType;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkAction;
@@ -93,6 +94,19 @@ class DevelopersTable
                     ->label('Available')
                     ->sortable(),
 
+                TextColumn::make('availability_type')
+                    ->label('Availability Type')
+                    ->formatStateUsing(function ($state) {
+                        if (empty($state) || !is_array($state)) {
+                            return null;
+                        }
+                        return collect($state)->map(fn($type) => $type->getLabel())->toArray();
+                    })
+                    ->badge()
+                    ->separator(',')
+                    ->sortable()
+                    ->toggleable(),
+
                 ToggleColumn::make('recommended_by_us')
                     ->label('Recommended By Us')
                     ->sortable(),
@@ -119,6 +133,20 @@ class DevelopersTable
                     ->trueLabel('Available only')
                     ->falseLabel('Unavailable only')
                     ->native(false),
+
+                SelectFilter::make('availability_type')
+                    ->label('Availability Type')
+                    ->options(AvailabilityType::class)
+                    ->query(function ($query, array $data) {
+                        if (!empty($data['value'])) {
+                            $value = $data['value'];
+                            // Convert enum to string value if needed
+                            if ($value instanceof AvailabilityType) {
+                                $value = $value->value;
+                            }
+                            $query->whereJsonContains('availability_type', $value);
+                        }
+                    }),
 
                 TernaryFilter::make('recommended_by_us')
                     ->label('Recommended By Us')

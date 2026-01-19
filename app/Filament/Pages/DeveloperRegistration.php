@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Enums\DeveloperStatus;
 use App\Enums\WorldGovernorate;
 use App\Enums\SalaryCurrency;
+use App\Enums\AvailabilityType;
 use App\Filament\Customs\ExpectedSalaryFromField;
 use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
@@ -112,6 +113,14 @@ class DeveloperRegistration extends SimplePage implements HasForms
                             ->options(SalaryCurrency::class)
                             ->searchable()
                             ->default(SalaryCurrency::IQD),
+
+                        Select::make('availability_type')
+                            ->label('Availability Type')
+                            ->options(AvailabilityType::class)
+                            ->multiple()
+                            ->searchable()
+                            ->nullable()
+                            ->helperText('Select your preferred work arrangement(s)'),
 
                         Textarea::make('bio')
                             ->label('Bio / About You')

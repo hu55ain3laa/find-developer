@@ -6,6 +6,8 @@ use App\Enums\DeveloperStatus;
 use App\Enums\WorldGovernorate;
 use App\Enums\SalaryCurrency;
 use App\Enums\SubscriptionPlan;
+use App\Enums\AvailabilityType;
+use App\Casts\AvailabilityTypeArray;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +41,7 @@ class Developer extends Model
         'expected_salary_to',
         'salary_currency',
         'is_available',
+        'availability_type',
         'recommended_by_us',
         'status',
         'subscription_plan',
@@ -58,6 +61,7 @@ class Developer extends Model
         'subscription_plan' => SubscriptionPlan::class,
         'location' => WorldGovernorate::class,
         'salary_currency' => SalaryCurrency::class,
+        'availability_type' => AvailabilityTypeArray::class,
     ];
 
     protected static function boot()

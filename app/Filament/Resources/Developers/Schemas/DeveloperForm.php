@@ -6,6 +6,7 @@ use App\Enums\DeveloperStatus;
 use App\Enums\WorldGovernorate;
 use App\Enums\SalaryCurrency;
 use App\Enums\SubscriptionPlan;
+use App\Enums\AvailabilityType;
 use App\Filament\Customs\ExpectedSalaryFromField;
 use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\User;
@@ -113,6 +114,14 @@ class DeveloperForm
                             ->label('Available for hire')
                             ->default(true)
                             ->required(),
+
+                        Select::make('availability_type')
+                            ->label('Availability Type')
+                            ->options(AvailabilityType::class)
+                            ->multiple()
+                            ->searchable()
+                            ->nullable()
+                            ->helperText('Select your preferred work arrangement(s)'),
 
                         Toggle::make('recommended_by_us')
                             ->label('Recommended By Us')
