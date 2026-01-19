@@ -51,7 +51,26 @@
                                     </div>
                                     
                                     @if($service->description)
-                                        <p class="service-description">{{ $service->description }}</p>
+                                        <div x-data="{ expanded: false }" class="service-description-container">
+                                            @php
+                                                $descriptionLength = strlen($service->description);
+                                                $maxLength = 150;
+                                                $truncatedDescription = $descriptionLength > $maxLength ? substr($service->description, 0, $maxLength) . '...' : $service->description;
+                                            @endphp
+                                            <p class="service-description">
+                                                <span x-show="!expanded">{{ $truncatedDescription }}</span>
+                                                <span x-show="expanded" x-cloak>{{ $service->description }}</span>
+                                            </p>
+                                            @if($descriptionLength > $maxLength)
+                                                <button 
+                                                    @click="expanded = !expanded"
+                                                    class="service-description-read-more"
+                                                >
+                                                    <span x-show="!expanded">Read more</span>
+                                                    <span x-show="expanded" x-cloak>Show less</span>
+                                                </button>
+                                            @endif
+                                        </div>
                                     @endif
 
                                     <div class="service-details">

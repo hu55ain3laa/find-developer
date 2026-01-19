@@ -191,11 +191,33 @@
     border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
+.service-description-container {
+    margin-bottom: var(--spacing-lg);
+}
+
 .service-description {
     font-size: var(--font-size-base);
     color: var(--text-secondary);
     line-height: 1.6;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
+}
+
+.service-description-read-more {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    padding: var(--spacing-xs) 0;
+    transition: all var(--transition-base);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.service-description-read-more:hover {
+    color: var(--color-secondary);
+    text-decoration: none;
 }
 
 .service-details {

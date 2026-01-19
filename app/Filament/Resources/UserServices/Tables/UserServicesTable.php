@@ -37,9 +37,8 @@ class UserServicesTable
 
                 TextColumn::make('price')
                     ->sortable()
-                    ->formatStateUsing(fn($state) => $state ? number_format($state) : '-')
-                    ->toggleable()
-                    ->default('-'),
+                    ->formatStateUsing(fn($state) =>  number_format($state))
+                    ->toggleable(),
 
                 ToggleColumn::make('is_active')
                     ->label('Active')
