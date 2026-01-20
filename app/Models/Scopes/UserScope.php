@@ -14,7 +14,7 @@ class UserScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        if (auth()->user()->isSuperAdmin()) {
+        if (auth()->guest() || auth()->user()?->isSuperAdmin()) {
             return;
         }
 
