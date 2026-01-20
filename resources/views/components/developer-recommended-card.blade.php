@@ -211,7 +211,7 @@
                             {{ $skill->name }}
                         </span>
                     @endforeach
-                    @if($developer->skills->count() > 5)
+                    @if($developer->skills->count() > 5 && $developer->isPremium())
                         <span 
                             class="skill-tag skill-tag-more" 
                             @click="expanded = !expanded"
@@ -256,7 +256,7 @@
                     </svg>
                 </a>
 
-                @if($developer->slug)
+                @if($developer->slug && $developer->isPremium())
                 <a href="{{ route('developer.projects', $developer->slug) }}" class="social-link projects" title="View All Projects">
                     View All Projects ({{ $developer->projects_count }})
                     <svg class="social-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">

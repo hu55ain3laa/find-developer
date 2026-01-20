@@ -132,6 +132,11 @@ class Developer extends Model
         return $query->where('recommended_by_us', true);
     }
 
+    public function isPremium(): bool
+    {
+        return $this->subscription_plan === SubscriptionPlan::PREMIUM;
+    }
+
     public function scopeByExperience($query, $minYears, $maxYears = null)
     {
         $query->where('years_of_experience', '>=', $minYears);
