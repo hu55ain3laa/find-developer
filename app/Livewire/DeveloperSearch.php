@@ -234,7 +234,7 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                     }
                 });
             })
-            ->when(!empty($filters['availableOnly']), function ($query) use ($filters) {
+            ->when(!is_null($filters['availableOnly']), function ($query) use ($filters) {
                 $query->where('is_available', $filters['availableOnly']);
             });
 
