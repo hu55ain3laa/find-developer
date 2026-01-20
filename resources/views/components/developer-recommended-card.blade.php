@@ -58,7 +58,7 @@
                             </svg>
                             <p class="work-empty-text">No portfolio items yet</p>
                         </div>
-                    @elseif($developer->projects_count > 6 && $developer->slug !== null)
+                    @elseif($developer->projects_count > 6 && $developer->slug !== null && $developer->isPremium())
                         <div class="work-item-view-all">
                             <a href="{{ route('developer.projects', $developer->slug) }}" class="work-view-all-link">
                                 View All Projects ({{ $developer->projects_count }})
@@ -211,7 +211,7 @@
                             {{ $skill->name }}
                         </span>
                     @endforeach
-                    @if($developer->skills->count() > 5 && $developer->isPremium())
+                    @if($developer->skills->count() > 5)
                         <span 
                             class="skill-tag skill-tag-more" 
                             @click="expanded = !expanded"
