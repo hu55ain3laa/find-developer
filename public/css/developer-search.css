@@ -1008,11 +1008,42 @@ html.dark .availability-type-badge.availability-type-freelance {
     margin-bottom: var(--spacing-xs);
 }
 
+.work-item-description-container {
+    margin-bottom: var(--spacing-sm);
+}
+
 .work-item-description {
     font-size: var(--font-size-xs);
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     line-height: 1.5;
+}
+
+.work-item-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+}
+
+.work-item-read-more:hover {
+    color: var(--color-primary-dark);
+    background: var(--bg-tertiary);
+    transform: translateY(-1px);
+}
+
+.work-item-read-more:active {
+    transform: translateY(0);
 }
 
 .work-item-link {

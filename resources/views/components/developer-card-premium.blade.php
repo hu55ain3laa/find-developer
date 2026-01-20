@@ -15,11 +15,30 @@
             <div class="developer-work-section">
                 <h4 class="work-section-title">Portfolio & Work</h4>
                 <div class="work-items">
-                    @foreach($developer->projects as $project)
+                    @foreach($developer->projects as $index => $project)
                         <div class="work-item">
                             <h5 class="work-item-title">{{ $project->title }}</h5>
                             @if($project->description)
-                                <p class="work-item-description">{{ $project->description }}</p>
+                                <div x-data="{ expanded: false }" class="work-item-description-container">
+                                    @php
+                                        $descLength = strlen($project->description);
+                                        $maxLength = 100;
+                                        $truncatedDesc = $descLength > $maxLength ? substr($project->description, 0, $maxLength) . '...' : $project->description;
+                                    @endphp
+                                    <p class="work-item-description">
+                                        <span x-show="!expanded">{{ $truncatedDesc }}</span>
+                                        <span x-show="expanded" x-cloak>{{ $project->description }}</span>
+                                    </p>
+                                    @if($descLength > $maxLength)
+                                        <button 
+                                            @click="expanded = !expanded"
+                                            class="work-item-read-more"
+                                        >
+                                            <span x-show="!expanded">Read more</span>
+                                            <span x-show="expanded" x-cloak>Show less</span>
+                                        </button>
+                                    @endif
+                                </div>
                             @endif
                             @if($project->link)
                                 <a href="{{ $project->link }}" target="_blank" class="work-item-link">
