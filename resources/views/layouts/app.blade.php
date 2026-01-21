@@ -128,9 +128,6 @@
                     <a href="{{ route('services') }}" class="navbar-link" @click="mobileMenuOpen = false">
                         Services
                     </a>
-                    <a href="{{ route('badges') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                        Badges
-                    </a>
                     <a href="{{ route('jobs') }}" class="navbar-link" @click="mobileMenuOpen = false">
                         Jobs
                     </a>
@@ -143,6 +140,24 @@
                     <a href="{{ route('register') }}" class="navbar-link" @click="mobileMenuOpen = false">
                         Register as Developer
                     </a>
+                    @auth
+                        @if(auth()->user()->isDeveloper())
+                            <form method="POST" action="{{ route('developer.logout') }}" class="navbar-logout-form">
+                                @csrf
+                                <button type="submit" class="navbar-link navbar-link-logout" @click="mobileMenuOpen = false">
+                                    Logout
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ route('developer.login') }}" class="navbar-link" @click="mobileMenuOpen = false">
+                                Developer Login
+                            </a>
+                        @endif
+                    @else
+                        <a href="{{ route('developer.login') }}" class="navbar-link" @click="mobileMenuOpen = false">
+                            Developer Login
+                        </a>
+                    @endauth
                     <!-- Dark Mode Toggle -->
                     <button 
                         type="button"

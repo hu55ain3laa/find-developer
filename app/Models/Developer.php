@@ -113,6 +113,36 @@ class Developer extends Model
             ->withTimestamps();
     }
 
+    public function recommendationsGiven(): HasMany
+    {
+        return $this->hasMany(DeveloperRecommendation::class, 'recommender_id');
+    }
+
+    public function recommendationsReceived(): HasMany
+    {
+        return $this->hasMany(DeveloperRecommendation::class, 'recommended_id');
+    }
+
+    public function recommendedDevelopers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Developer::class,
+            'developer_recommendations',
+            'recommender_id',
+            'recommended_id'
+        )->withTimestamps();
+    }
+
+    public function recommendedByDevelopers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Developer::class,
+            'developer_recommendations',
+            'recommended_id',
+            'recommender_id'
+        )->withTimestamps();
+    }
+
     public function scopeAvailable($query)
     {
         return $query->where('is_available', true);

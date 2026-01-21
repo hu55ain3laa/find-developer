@@ -2,10 +2,13 @@
 
 use App\Filament\Pages\DeveloperRegistration;
 use App\Filament\Pages\CompanyJobRegistration;
+use App\Filament\Pages\DeveloperRecommendation;
 use App\Http\Controllers\DeveloperProjectsController;
+use App\Http\Controllers\DeveloperRecommendationsViewController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\RecommendedDevelopersController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\DeveloperAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,3 +48,17 @@ Route::get('/robots.txt', function () {
 
 Route::get('/developer/{developerSlug}/projects', [DeveloperProjectsController::class, 'show'])
     ->name('developer.projects');
+
+Route::get('/developer/{developerSlug}/recommendations', [DeveloperRecommendationsViewController::class, 'show'])
+    ->name('developer.recommendations');
+
+// Developer Authentication Routes
+Route::get('/developer/login', [DeveloperAuthController::class, 'showLoginForm'])
+    ->name('developer.login');
+Route::post('/developer/login', [DeveloperAuthController::class, 'login']);
+Route::post('/developer/logout', [DeveloperAuthController::class, 'logout'])
+    ->name('developer.logout');
+
+// Developer Recommendation Routes (requires authentication)
+Route::get('/developer/{developer}/recommend', DeveloperRecommendation::class)
+    ->name('developer.recommend');
