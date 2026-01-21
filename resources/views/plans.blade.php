@@ -62,7 +62,7 @@
                                 <span style="font-weight: 500; color: var(--text-secondary);">Can see the salary and any hidden fields in the developers card</span>
                             </li>
                         </ul>
-                        <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20HR%20plan" 
+                        <a href="mailto:ht3aa2001@gmail.com?subject=HR%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20HR%20plan" 
                            target="_blank" 
                            class="pricing-button pricing-button-hr" 
                            style="display: block; width: 100%; text-align: center; padding: 1rem 2rem; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 600; text-decoration: none; margin-top: 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);">
@@ -111,7 +111,7 @@
                                 <span>A domain with yourname.find-domain.com suffix</span>
                             </li>
                         </ul>
-                        <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Basic%20Portfolio%20plan" 
+                        <a href="mailto:ht3aa2001@gmail.com?subject=Basic%20Portfolio%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Basic%20Portfolio%20plan" 
                            target="_blank" 
                            class="pricing-button pricing-button-student-basic">
                             Contact Us
@@ -156,7 +156,7 @@
                                 <span>A domain with yourname.find-domain.com suffix</span>
                             </li>
                         </ul>
-                        <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Standard%20Portfolio%20plan" 
+                        <a href="mailto:ht3aa2001@gmail.com?subject=Standard%20Portfolio%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Standard%20Portfolio%20plan" 
                            target="_blank" 
                            class="pricing-button pricing-button-student-standard">
                             Contact Us
@@ -201,7 +201,7 @@
                                 <span>A custom domain specific for you</span>
                             </li>
                         </ul>
-                        <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Premium%20Portfolio%20plan" 
+                        <a href="mailto:ht3aa2001@gmail.com?subject=Premium%20Portfolio%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Premium%20Portfolio%20plan" 
                            target="_blank" 
                            class="pricing-button pricing-button-student-premium">
                             Contact Us
@@ -269,7 +269,7 @@
                             <span>Be in the pro section of the website</span>
                         </li>
                     </ul>
-                    <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Pro%20plan" 
+                    <a href="mailto:ht3aa2001@gmail.com?subject=Pro%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Pro%20plan" 
                        target="_blank" 
                        class="pricing-button pricing-button-pro">
                         Contact Us
@@ -321,7 +321,7 @@
                             <span>We will provide a developer projects page for you only</span>
                         </li>
                     </ul>
-                    <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Premium%20plan" 
+                    <a href="mailto:ht3aa2001@gmail.com?subject=Premium%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Premium%20plan" 
                        target="_blank" 
                        class="pricing-button pricing-button-premium">
                         Contact Us

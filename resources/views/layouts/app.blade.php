@@ -191,7 +191,7 @@
                             To make your profile good and increase the chance to hire/getting work you can do it with only <strong>10,000 IQD</strong> 
                         </p>
                     </div>
-                    <a href="https://wa.me/9647708246418?text=Hello,%20I%20would%20like%20to%20improve%20my%20developer%20profile" 
+                    <a href="mailto:ht3aa2001@gmail.com?subject=Developer%20Profile%20Improvement&body=Hello,%20I%20would%20like%20to%20improve%20my%20developer%20profile" 
                        target="_blank" 
                        class="developer-promotion-banner-button">
                         Contact Us
