@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use Laravel\Telescope\EntryType;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
@@ -14,7 +15,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     public function register(): void
     {
-        // Telescope::night();
+        Telescope::night();
 
         $this->hideSensitiveRequestDetails();
 
@@ -22,13 +23,26 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         Telescope::filter(function (IncomingEntry $entry) use ($isLocal) {
             return $isLocal ||
-                $entry->isReportableException() ||
-                $entry->isFailedRequest() ||
+                $this->isException($entry) ||
+                $this->isFailedRequest($entry) ||
                 $entry->isFailedJob() ||
-                $entry->isException() ||
+                $entry->isSlowQuery() ||
                 $entry->isScheduledTask() ||
+                $entry->isSlowQuery() ||
+                $entry->isLog() ||
                 $entry->hasMonitoredTag();
         });
+    }
+
+    private function isFailedRequest(IncomingEntry $entry): bool
+    {
+        return $entry->type === EntryType::REQUEST &&
+            ($entry->content['response_status'] ?? 200) >= 400;
+    }
+
+    private function isException(IncomingEntry $entry): bool
+    {
+        return $entry->type === EntryType::EXCEPTION;
     }
 
     /**
@@ -36,7 +50,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function hideSensitiveRequestDetails(): void
     {
-        if ($this->app->environment('local')) {
+        if ($this->app->environment('local', 'uat')) {
             return;
         }
 
