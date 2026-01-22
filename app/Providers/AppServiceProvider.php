@@ -24,5 +24,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Activity::class, ActivityPolicy::class);
+
+
+        Gate::define('viewTelescope', function (User $user) {
+            return $user->isSuperAdmin();
+        });
     }
 }
