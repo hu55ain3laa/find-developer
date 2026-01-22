@@ -48,9 +48,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
     #[Url]
     public int $maxExperience = 50;
     #[Url]
-    public int $expected_salary_from = 0;
+    public string $expected_salary_from = '0';
     #[Url]
-    public int $expected_salary_to = 0;
+    public string $expected_salary_to = '0';
     #[Url]
     public ?Currency $salary_currency = null;
 
