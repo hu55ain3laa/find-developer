@@ -109,6 +109,29 @@ html.dark .xp-task-badge-in_progress {
     font-size: 0.9375rem;
 }
 
+.xp-task-description-text {
+    margin: 0 0 0.5rem 0;
+}
+
+.xp-task-read-more {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0;
+    font-size: var(--font-size-sm, 0.875rem);
+    font-weight: 500;
+    color: var(--color-primary, #6366f1);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color var(--transition-base, 200ms ease-in-out);
+}
+
+.xp-task-read-more:hover {
+    color: var(--color-primary-dark, #4f46e5);
+    text-decoration: underline;
+}
+
 .xp-task-card-footer {
     display: flex;
     justify-content: space-between;
