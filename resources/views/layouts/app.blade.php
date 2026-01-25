@@ -174,7 +174,7 @@
         </nav>
 
         <!-- Developer Promotion Banner -->
-        {{-- <div class="developer-promotion-banner">
+        <div class="developer-promotion-banner">
             <div class="developer-promotion-banner-container">
                 <div class="developer-promotion-banner-content">
                     <div class="developer-promotion-banner-text-wrapper">
@@ -183,21 +183,16 @@
                         </svg>
                         <div class="developer-promotion-banner-text-block">
                             <p class="developer-promotion-banner-text">
-                                To make your profile good and increase the chance to hire/getting work you can do it with only <strong>10,000 IQD</strong> 
+                                If You find this platform useful, you can support us by sponsoring us or donating to us. Qi Card Number is <strong>5862997060</strong>
                             </p>
                             <p class="developer-promotion-banner-note">
-                                You should have good profile in order to get this subscription.
+                                We will use the money to improve by marketing the platform and add new features.
                             </p>
                         </div>
                     </div>
-                    <a href="mailto:ht3aa2001@gmail.com?subject=Developer%20Profile%20Improvement&body=Hello,%20I%20would%20like%20to%20improve%20my%20developer%20profile" 
-                       target="_blank" 
-                       class="developer-promotion-banner-button">
-                        Contact Us
-                    </a>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         @if($currentRoute === 'home')
             <!-- Info Banner -->
