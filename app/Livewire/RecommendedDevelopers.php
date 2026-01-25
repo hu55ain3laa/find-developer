@@ -25,7 +25,7 @@ class RecommendedDevelopers extends Component
                     ->where('show_project', true);
             }])
             ->recommended()
-            ->orderBy('created_at', 'desc')
+            ->orderBy('projects_count', 'desc')
             ->paginate(15);
 
         return view('livewire.recommended-developers', [

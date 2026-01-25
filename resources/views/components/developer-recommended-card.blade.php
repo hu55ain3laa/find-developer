@@ -273,7 +273,7 @@
                     </svg>
                 </a>
 
-                @if($developer->slug && $developer->isPremium())
+                @if($developer->slug)
                 <a href="{{ route('developer.projects', $developer->slug) }}" class="social-link projects" title="View All Projects">
                     View All Projects ({{ $developer->projects_count }})
                     <svg class="social-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">

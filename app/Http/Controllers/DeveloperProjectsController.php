@@ -19,7 +19,7 @@ class DeveloperProjectsController extends Controller
         }])->where('slug', $developerSlug)->firstOrFail();
 
 
-        if ($developer->subscription_plan !== SubscriptionPlan::PREMIUM) {
+        if ($developer->subscription_plan !== SubscriptionPlan::PREMIUM && !$developer->recommended_by_us) {
             return redirect()->route('home');
         }
 
