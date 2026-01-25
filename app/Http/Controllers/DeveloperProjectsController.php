@@ -13,7 +13,9 @@ class DeveloperProjectsController extends Controller
     {
 
         $developer = Developer::with(['jobTitle', 'projects' => function ($query) {
-            $query->withoutGlobalScopes([DeveloperScope::class])->orderBy('created_at', 'desc');
+            $query->withoutGlobalScopes([DeveloperScope::class])
+                ->where('show_project', true)
+                ->orderBy('created_at', 'desc');
         }])->where('slug', $developerSlug)->firstOrFail();
 
 

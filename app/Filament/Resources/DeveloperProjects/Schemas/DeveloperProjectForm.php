@@ -5,6 +5,7 @@ namespace App\Filament\Resources\DeveloperProjects\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -38,6 +39,12 @@ class DeveloperProjectForm
                             ->url()
                             ->maxLength(255)
                             ->prefixIcon('heroicon-o-link')
+                            ->columnSpanFull(),
+
+                        Toggle::make('show_project')
+                            ->label('Show Project in Frontend')
+                            ->default(true)
+                            ->helperText('Enable this to display the project on the frontend')
                             ->columnSpanFull(),
                     ]),
             ]);

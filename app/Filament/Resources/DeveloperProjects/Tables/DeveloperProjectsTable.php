@@ -9,6 +9,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Filters\TernaryFilter;
 
 class DeveloperProjectsTable
 {
@@ -38,6 +39,10 @@ class DeveloperProjectsTable
                     ->icon('heroicon-o-link')
                     ->toggleable(),
 
+                Tables\Columns\ToggleColumn::make('show_project')
+                    ->label('Show in Frontend')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -48,7 +53,14 @@ class DeveloperProjectsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([])
+            ->filters([
+                TernaryFilter::make('show_project')
+                    ->label('Show in Frontend')
+                    ->boolean()
+                    ->trueLabel('Visible only')
+                    ->falseLabel('Hidden only')
+                    ->native(false),
+            ])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),

@@ -119,17 +119,8 @@
                     x-transition:leave-end="opacity-0 -translate-y-2"
                     @click.away="mobileMenuOpen = false"
                 >
-                    <a href="{{ route('plans') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                        Plans
-                    </a>
-                    <a href="{{ route('about') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                        About Us
-                    </a>
                     <a href="{{ route('services') }}" class="navbar-link" @click="mobileMenuOpen = false">
                         Services
-                    </a>
-                    <a href="{{ route('charts') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                        Charts
                     </a>
                     <a href="{{ route('experience-tasks') }}" class="navbar-link" @click="mobileMenuOpen = false">
                         Get Experience
@@ -140,8 +131,8 @@
                         </svg>
                         Recommended
                     </a>
-                    <a href="{{ route('register') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                        Register as Developer
+                    <a href="{{ route('register') }}" class="navbar-link" style="border: 1px solid var(--color-primary);" @click="mobileMenuOpen = false">
+                        Register
                     </a>
                     @auth
                         @if(auth()->user()->isDeveloper())
@@ -153,12 +144,12 @@
                             </form>
                         @else
                             <a href="{{ route('developer.login') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                                Developer Login
+                                Login
                             </a>
                         @endif
                     @else
                         <a href="{{ route('developer.login') }}" class="navbar-link" @click="mobileMenuOpen = false">
-                            Developer Login
+                             Login
                         </a>
                     @endauth
                     <!-- Dark Mode Toggle -->
@@ -232,6 +223,17 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
+                <div class="footer-links">
+                    <a href="{{ route('plans') }}" class="footer-link">
+                        Plans
+                    </a>
+                    <a href="{{ route('about') }}" class="footer-link">
+                        About Us
+                    </a>
+                    <a href="{{ route('charts') }}" class="footer-link">
+                        Charts
+                    </a>
+                </div>
                 <p class="footer-text">
                     &copy; {{ date('Y') }} FindDeveloper. All rights reserved.
                 </p>

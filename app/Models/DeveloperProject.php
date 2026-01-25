@@ -21,11 +21,21 @@ class DeveloperProject extends Model
         'title',
         'description',
         'link',
+        'show_project',
+    ];
+
+    protected $casts = [
+        'show_project' => 'boolean',
     ];
 
     public function developer(): BelongsTo
     {
         return $this->belongsTo(Developer::class);
+    }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('show_project', true);
     }
 
     public function getActivitylogOptions(): LogOptions

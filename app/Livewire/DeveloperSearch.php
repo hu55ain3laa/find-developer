@@ -226,10 +226,14 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
 
         $baseQuery = Developer::with(['jobTitle', 'skills', 'badges'])
             ->with(['projects' => function ($query) {
-                $query->withoutGlobalScopes([DeveloperScope::class])->limit(6)->orderBy('created_at', 'desc');
+                $query->withoutGlobalScopes([DeveloperScope::class])
+                    ->where('show_project', true)
+                    ->limit(6)
+                    ->orderBy('created_at', 'desc');
             }])
             ->withCount(['projects' => function ($query) {
-                $query->withoutGlobalScopes([DeveloperScope::class]);
+                $query->withoutGlobalScopes([DeveloperScope::class])
+                    ->where('show_project', true);
             }])
             ->when(!empty($filters['search']), function ($query) use ($filters) {
                 $query->where(function ($q) use ($filters) {

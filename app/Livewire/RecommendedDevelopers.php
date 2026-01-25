@@ -15,10 +15,14 @@ class RecommendedDevelopers extends Component
     {
         $developers = Developer::with(['jobTitle', 'skills'])
             ->with(['projects' => function ($query) {
-                $query->withoutGlobalScopes([DeveloperScope::class])->limit(6)->orderBy('created_at', 'desc');
+                $query->withoutGlobalScopes([DeveloperScope::class])
+                    ->where('show_project', true)
+                    ->limit(6)
+                    ->orderBy('created_at', 'desc');
             }])
             ->withCount(['projects' => function ($query) {
-                $query->withoutGlobalScopes([DeveloperScope::class]);
+                $query->withoutGlobalScopes([DeveloperScope::class])
+                    ->where('show_project', true);
             }])
             ->recommended()
             ->orderBy('created_at', 'desc')
