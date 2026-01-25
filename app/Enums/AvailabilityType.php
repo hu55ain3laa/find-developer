@@ -45,7 +45,7 @@ enum AvailabilityType: string implements HasLabel, HasColor, HasIcon
             self::PART_TIME => 'heroicon-o-clock',
             self::FREELANCE => 'heroicon-o-user',
             self::HYBRID => 'heroicon-o-computer-desktop',
-            self::REMOTE => 'heroicon-o-globe',
+            self::REMOTE => 'heroicon-o-globe-alt',
         };
     }
 }
