@@ -1916,6 +1916,72 @@ html.dark .dark-mode-icon.moon-icon {
     }
 }
 
+/* Email Check Banner */
+.email-check-banner {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
+    border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+    padding: var(--spacing-md) 0;
+    position: relative;
+}
+
+.email-check-banner-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.email-check-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+}
+
+.email-check-banner-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-warning);
+    flex-shrink: 0;
+}
+
+.email-check-banner-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.email-check-banner-text strong {
+    color: var(--color-warning);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .email-check-banner {
+        padding: var(--spacing-sm) 0;
+    }
+    
+    .email-check-banner-container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .email-check-banner-content {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .email-check-banner-text {
+        font-size: var(--font-size-xs);
+    }
+    
+    .email-check-banner-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
 /* Developer Promotion Banner */
 .developer-promotion-banner {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
