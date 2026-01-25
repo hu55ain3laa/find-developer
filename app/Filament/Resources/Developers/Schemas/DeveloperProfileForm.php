@@ -31,6 +31,7 @@ class DeveloperProfileForm
                         TextInput::make('email')
                             ->email()
                             ->required()
+                            ->hidden(fn($livewire) => self::isDeveloperProfilePage($livewire))
                             ->maxLength(255),
 
                         TextInput::make('phone')
