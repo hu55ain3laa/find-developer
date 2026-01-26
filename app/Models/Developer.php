@@ -19,8 +19,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use App\Observers\DeveloperObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 #[ScopedBy([ApprovedScope::class])]
+#[ObservedBy(DeveloperObserver::class)]
 class Developer extends Model
 {
     use HasFactory, LogsActivity, Notifiable;
