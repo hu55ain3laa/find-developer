@@ -18,6 +18,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rules\Unique;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 class DevelopersTable
 {
@@ -205,6 +207,7 @@ class DevelopersTable
                                 ->rules([
                                     new Unique(User::class, 'email')
                                 ])
+                                ->copyable()
                                 ->maxLength(255)
                                 ->default(fn($record) => $record->email),
 
@@ -228,7 +231,8 @@ class DevelopersTable
                                 ->password()
                                 ->rules([Password::default()])
                                 ->required()
-                                ->dehydrateStateUsing(fn($state) => bcrypt($state)),
+                                ->copyable()
+                                ->formatStateUsing(fn($state) => Str::uuid()->toString()),
 
                             Toggle::make('can_access_admin_panel')
                                 ->label('Can Access Admin Panel')
@@ -241,6 +245,11 @@ class DevelopersTable
                                 ->searchable()
                                 ->preload()
                                 ->required(),
+
+                            TextEntry::make('password_and_email')
+                                ->label('Password')
+                                ->copyable()
+                                ->getStateUsing(fn($get) => "Email: {$get('email')}\nPassword: {$get('password')}"),
                         ])
                         ->action(function ($record, array $data) {
                             $user = User::create([

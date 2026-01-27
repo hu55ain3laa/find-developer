@@ -59,6 +59,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
     public array $availability_type = [];
 
     #[Url]
+    public array $has_urls = [];
+
+    #[Url]
     public ?int $availableOnly = null;
 
 
@@ -151,6 +154,19 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                                     ->nullable()
                                     ->live()
                                     ->afterStateUpdated(fn() => $this->resetPage()),
+
+                                Select::make('has_urls')
+                                    ->label('Has URLs')
+                                    ->options([
+                                        'linkedin_url' => 'Has LinkedIn URL',
+                                        'github_url' => 'Has GitHub URL',
+                                        'portfolio_url' => 'Has Portfolio URL',
+                                    ])
+                                    ->multiple()
+                                    ->searchable()
+                                    ->nullable()
+                                    ->live()
+                                    ->afterStateUpdated(fn() => $this->resetPage()),
                             ]),
 
                         Select::make('availableOnly')
@@ -191,6 +207,9 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             $count++;
         }
         if (!empty($this->availability_type)) {
+            $count++;
+        }
+        if (!empty($this->has_urls)) {
             $count++;
         }
 
@@ -288,6 +307,20 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                 $query->where(function ($q) use ($types) {
                     foreach ($types as $type) {
                         $q->orWhereJsonContains('availability_type', $type instanceof AvailabilityType ? $type->value : $type);
+                    }
+                });
+            })
+            ->when(!empty($filters['has_urls']), function ($query) use ($filters) {
+                $urls = is_array($filters['has_urls'])
+                    ? $filters['has_urls']
+                    : [$filters['has_urls']];
+
+                $query->where(function ($q) use ($urls) {
+                    foreach ($urls as $urlField) {
+                        $q->orWhere(function ($subQ) use ($urlField) {
+                            $subQ->whereNotNull($urlField)
+                                ->where($urlField, '!=', '');
+                        });
                     }
                 });
             })
