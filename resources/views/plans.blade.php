@@ -47,6 +47,12 @@
                             </svg>
                             <span style="font-weight: 500; color: var(--text-secondary);">Hosting Your Portfolio with a subdomain (e.g., yourname.find-developer.com or <a href="https://hasan-tahseen.find-developer.com/" target="_blank" style="color: var(--color-primary); text-decoration: underline;">hasan-tahseen.find-developer.com</a>)</span>
                         </li>
+                        <li class="pricing-feature" style="padding: 1rem 0;">
+                            <svg class="pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; color: var(--color-primary); margin-right: 0.75rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span style="font-weight: 500; color: var(--text-secondary);">Support for any problem you encounter</span>
+                        </li>
                     </ul>
                     <a href="mailto:ht3aa2001@gmail.com?subject=Hosting%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Hosting%20plan" 
                        target="_blank" 
