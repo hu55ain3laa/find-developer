@@ -27,15 +27,13 @@
             </div>
 
             <div class="pricing-cards">
-            <!-- Hosting Plan -->
+            <!-- Hosting Plan (Subdomain - Free) -->
             <div class="pricing-card pricing-card-hosting" style="position: relative; border: 2px solid var(--color-primary); background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3);">
                 <div class="pricing-card-header">
-                    <h3 class="pricing-card-title" style="color: var(--color-primary); font-size: 2rem; font-weight: 700;">Hosting</h3>
+                    <h3 class="pricing-card-title" style="color: var(--color-primary); font-size: 2rem; font-weight: 700;">Hosting (Subdomain)</h3>
                     <div class="pricing-card-price-wrapper">
                         <div class="pricing-card-price">
-                            <span class="pricing-price-amount" style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5,000</span>
-                            <span class="pricing-price-currency" style="font-size: 1.25rem; font-weight: 600; color: var(--text-tertiary);">IQD</span>
-                            <span class="pricing-price-period" style="font-size: 1rem; color: var(--text-muted);">/month</span>
+                            <span class="pricing-price-amount" style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Free</span>
                         </div>
                     </div>
                 </div>
@@ -68,10 +66,9 @@
                 <div class="pricing-card-header">
                     <h3 class="pricing-card-title" style="color: var(--color-primary); font-size: 2rem; font-weight: 700;">Hosting with .iq Domain</h3>
                     <div class="pricing-card-price-wrapper">
-                        <div class="pricing-card-price" style="margin-bottom: 0.5rem;">
-                            <span class="pricing-price-amount" style="font-size: 1.75rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5,000</span>
-                            <span class="pricing-price-currency" style="font-size: 1rem; font-weight: 600; color: var(--text-tertiary);">IQD</span>
-                            <span class="pricing-price-period" style="font-size: 0.875rem; color: var(--text-muted);">/month</span>
+                        <div class="pricing-card-price" style="margin-bottom: 0.25rem;">
+                            <span class="pricing-price-amount" style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Free</span>
+                            <span style="font-size: 1rem; color: var(--text-muted); margin-left: 0.25rem;">hosting</span>
                         </div>
                         <div style="font-size: 0.875rem; color: var(--text-muted);">+ domain from <strong style="color: var(--text-secondary);">50,000 IQD / year</strong> (depends on name)</div>
                     </div>
