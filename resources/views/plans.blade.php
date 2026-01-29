@@ -63,6 +63,49 @@
                 </div>
             </div>
 
+            <!-- Hosting with .iq Domain Plan -->
+            <div class="pricing-card pricing-card-hosting" style="position: relative; border: 2px solid var(--color-primary); background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.3);">
+                <div class="pricing-card-header">
+                    <h3 class="pricing-card-title" style="color: var(--color-primary); font-size: 2rem; font-weight: 700;">Hosting with .iq Domain</h3>
+                    <div class="pricing-card-price-wrapper">
+                        <div class="pricing-card-price" style="margin-bottom: 0.5rem;">
+                            <span class="pricing-price-amount" style="font-size: 1.75rem; font-weight: 800; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5,000</span>
+                            <span class="pricing-price-currency" style="font-size: 1rem; font-weight: 600; color: var(--text-tertiary);">IQD</span>
+                            <span class="pricing-price-period" style="font-size: 0.875rem; color: var(--text-muted);">/month</span>
+                        </div>
+                        <div style="font-size: 0.875rem; color: var(--text-muted);">+ domain from <strong style="color: var(--text-secondary);">50,000 IQD / year</strong> (depends on name)</div>
+                    </div>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="pricing-features">
+                        <li class="pricing-feature" style="padding: 1rem 0; border-bottom: 1px solid rgba(99, 102, 241, 0.1);">
+                            <svg class="pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; color: var(--color-primary); margin-right: 0.75rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span style="font-weight: 500; color: var(--text-secondary);">Hosting Your Portfolio with a custom domain </span>
+                        </li>
+                        <li class="pricing-feature" style="padding: 1rem 0; border-bottom: 1px solid rgba(99, 102, 241, 0.1);">
+                            <svg class="pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; color: var(--color-primary); margin-right: 0.75rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span style="font-weight: 500; color: var(--text-secondary);">Custom domain ending with <strong>.iq</strong> (price from 50,000 IQD / year, depends on domain name). <em style="font-size: 0.875rem; color: var(--text-muted);">Provided by <a href="https://www.dev-house.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline;"><span dir="rtl">شركة بيت التطوير العراقي للتسويق للدعاية و الاعلان و المسجل المعتمد لدى هيئة الاعلام و الاتصالات لحجز النطاقات</span></a>.</em></span>
+                        </li>
+                        <li class="pricing-feature" style="padding: 1rem 0;">
+                            <svg class="pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; color: var(--color-primary); margin-right: 0.75rem;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span style="font-weight: 500; color: var(--text-secondary);">Support for any problem you encounter</span>
+                        </li>
+                    </ul>
+                    <a href="mailto:ht3aa2001@gmail.com?subject=Hosting%20with%20.iq%20Domain%20Plan%20Subscription&body=Hello,%20I%20would%20like%20to%20subscribe%20to%20the%20Hosting%20with%20.iq%20Domain%20plan" 
+                       target="_blank" 
+                       class="pricing-button pricing-button-hr" 
+                       style="display: block; width: 100%; text-align: center; padding: 1rem 2rem; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 600; text-decoration: none; margin-top: 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.4);">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+
             {{-- <!-- Free Plan -->
             <div class="pricing-card pricing-card-free">
                 <div class="pricing-card-header">
