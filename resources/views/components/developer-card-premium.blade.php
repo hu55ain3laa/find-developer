@@ -1,4 +1,4 @@
-@props(['developer'])
+@props(['developer', 'currentUserDeveloper' => null, 'recommendedDeveloperIds' => []])
 
 <div class="developer-card developer-card-premium">
     <div class="premium-badge">
@@ -297,7 +297,7 @@
                 </a>
             </div>
             @endif
-            <x-developer-recommendation-button :developer="$developer" />
+            <x-developer-recommendation-button :developer="$developer" :currentUserDeveloper="$currentUserDeveloper" :recommendedDeveloperIds="$recommendedDeveloperIds" />
         </div>
     </div>
 </div>

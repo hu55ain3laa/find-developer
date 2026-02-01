@@ -11,9 +11,11 @@ use App\Enums\RecommendationStatus;
 use App\Filament\Customs\ExpectedSalaryFromField;
 use App\Filament\Customs\ExpectedSalaryToField;
 use App\Models\Developer;
+use App\Models\DeveloperRecommendation;
 use App\Models\JobTitle;
 use App\Models\Scopes\DeveloperScope;
 use App\Models\Skill;
+use Illuminate\Support\Facades\Auth;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\Checkbox;
@@ -258,6 +260,10 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             ->withCount(['recommendationsReceived' => function ($query) {
                 $query->where('status', RecommendationStatus::APPROVED);
             }])
+            ->withCount([
+                'badges',
+                'badges as has_validated_data_count' => fn($query) => $query->where('slug', 'soft-skills'),
+            ])
             ->when(!empty($filters['search']), function ($query) use ($filters) {
                 $query->where(function ($q) use ($filters) {
                     $q->where('name', 'like', '%' . $filters['search'] . '%')
@@ -328,27 +334,39 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
                 $query->where('is_available', $filters['availableOnly']);
             });
 
-        // Get developers by subscription plan (secondary orderBy ensures stable pagination)
+        // Get developers by subscription plan; order by validated-data badge first, then badge count, then recommendations
+        $badgeOrder = fn($query) => $query
+            ->orderBy('has_validated_data_count', 'desc')
+            ->orderBy('badges_count', 'desc')
+            ->orderBy('recommendations_received_count', 'desc')
+            ->orderBy('id', 'asc');
+
         $premiumDevelopers = (clone $baseQuery)
             ->where('subscription_plan', SubscriptionPlan::PREMIUM)
-            ->orderBy('recommendations_received_count', 'desc')
-            ->orderBy('id', 'asc')
+            ->tap($badgeOrder)
             ->get();
 
         $proDevelopers = (clone $baseQuery)
             ->where('subscription_plan', SubscriptionPlan::PRO)
-            ->orderBy('recommendations_received_count', 'desc')
-            ->orderBy('id', 'asc')
+            ->tap($badgeOrder)
             ->get();
 
         $freeDevelopers = (clone $baseQuery)
             ->where('subscription_plan', SubscriptionPlan::FREE)
-            ->orderBy('recommendations_received_count', 'desc')
-            ->orderBy('id', 'asc')
+            ->tap($badgeOrder)
             ->paginate(15);
 
 
         $totalCount = $premiumDevelopers->count() + $proDevelopers->count() + $freeDevelopers->total();
+
+        Auth::user()?->loadMissing('developer');
+        $currentUserDeveloper = Auth::check() ? Auth::user()->developer : null;
+        $recommendedDeveloperIds = $currentUserDeveloper
+            ? DeveloperRecommendation::where('recommender_id', $currentUserDeveloper->id)
+                ->whereIn('status', [RecommendationStatus::PENDING, RecommendationStatus::APPROVED])
+                ->pluck('recommended_id')
+                ->all()
+            : [];
 
         return view('livewire.developer-search', [
             'premiumDevelopers' => $premiumDevelopers,
@@ -356,6 +374,8 @@ class DeveloperSearch extends Component implements HasSchemas, HasActions
             'freeDevelopers' => $freeDevelopers,
             'totalCount' => $totalCount,
             'activeFiltersCount' => $this->getActiveFiltersCount(),
+            'currentUserDeveloper' => $currentUserDeveloper,
+            'recommendedDeveloperIds' => $recommendedDeveloperIds,
         ]);
     }
 }

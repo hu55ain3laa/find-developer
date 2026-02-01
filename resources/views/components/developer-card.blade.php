@@ -1,4 +1,4 @@
-@props(['developer'])
+@props(['developer', 'currentUserDeveloper' => null, 'recommendedDeveloperIds' => []])
 
 @php
     $isPremium = $developer->subscription_plan->value === 'premium';
@@ -6,9 +6,9 @@
 @endphp
 
 @if($isPremium)
-    <x-developer-card-premium :developer="$developer" />
+    <x-developer-card-premium :developer="$developer" :currentUserDeveloper="$currentUserDeveloper" :recommendedDeveloperIds="$recommendedDeveloperIds" />
 @elseif($isPro)
-    <x-developer-card-pro :developer="$developer" />
+    <x-developer-card-pro :developer="$developer" :currentUserDeveloper="$currentUserDeveloper" :recommendedDeveloperIds="$recommendedDeveloperIds" />
 @else
-    <x-developer-card-normal :developer="$developer" />
+    <x-developer-card-normal :developer="$developer" :currentUserDeveloper="$currentUserDeveloper" :recommendedDeveloperIds="$recommendedDeveloperIds" />
 @endif

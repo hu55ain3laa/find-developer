@@ -1,16 +1,20 @@
-@props(['developer'])
+@props(['developer', 'currentUserDeveloper' => null, 'recommendedDeveloperIds' => null])
 
 <!-- Developer Recommendation Button -->
 @auth
-    @if(auth()->user()->isDeveloper())
-        @php
-            $recommender = auth()->user()->developer;
-            $isOwnProfile = $recommender && $recommender->id === $developer->id;
-            $hasPendingOrApprovedRecommendation = $recommender && \App\Models\DeveloperRecommendation::where('recommender_id', $recommender->id)
-                ->where('recommended_id', $developer->id)
-                ->whereIn('status', [\App\Enums\RecommendationStatus::PENDING, \App\Enums\RecommendationStatus::APPROVED])
-                ->exists();
-        @endphp
+    @php
+        $recommender = $currentUserDeveloper ?? (auth()->user()->isDeveloper() ? auth()->user()->developer : null);
+        $isOwnProfile = $recommender && $recommender->id === $developer->id;
+        $hasPendingOrApprovedRecommendation = $recommender && (
+            $recommendedDeveloperIds !== null
+                ? in_array($developer->id, $recommendedDeveloperIds)
+                : \App\Models\DeveloperRecommendation::where('recommender_id', $recommender->id)
+                    ->where('recommended_id', $developer->id)
+                    ->whereIn('status', [\App\Enums\RecommendationStatus::PENDING, \App\Enums\RecommendationStatus::APPROVED])
+                    ->exists()
+        );
+    @endphp
+    @if($recommender)
         <div class="developer-recommendation-section">
             @if($isOwnProfile)
                 <button 
