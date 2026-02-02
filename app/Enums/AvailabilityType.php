@@ -11,10 +11,10 @@ enum AvailabilityType: string implements HasLabel, HasColor, HasIcon
     case FULL_TIME = 'full-time';
     case PART_TIME = 'part-time';
     case FREELANCE = 'freelance';
-
     case HYBRID = 'hybrid';
-
     case REMOTE = 'remote';
+    case REMOTE_FULL_TIME = 'remote-full-time';
+    case HYBRID_FULL_TIME = 'hybrid-full-time';
 
     public function getLabel(): string
     {
@@ -24,6 +24,8 @@ enum AvailabilityType: string implements HasLabel, HasColor, HasIcon
             self::FREELANCE => 'Freelance',
             self::HYBRID => 'Hybrid',
             self::REMOTE => 'Remote',
+            self::REMOTE_FULL_TIME => 'Remote Full-time',
+            self::HYBRID_FULL_TIME => 'Hybrid Full-time',
         };
     }
 
@@ -35,6 +37,8 @@ enum AvailabilityType: string implements HasLabel, HasColor, HasIcon
             self::FREELANCE => 'info',
             self::HYBRID => 'warning',
             self::REMOTE => 'success',
+            self::REMOTE_FULL_TIME => 'success',
+            self::HYBRID_FULL_TIME => 'warning',
         };
     }
 
@@ -46,6 +50,8 @@ enum AvailabilityType: string implements HasLabel, HasColor, HasIcon
             self::FREELANCE => 'heroicon-o-user',
             self::HYBRID => 'heroicon-o-computer-desktop',
             self::REMOTE => 'heroicon-o-globe-alt',
+            self::REMOTE_FULL_TIME => 'heroicon-o-globe-alt',
+            self::HYBRID_FULL_TIME => 'heroicon-o-computer-desktop',
         };
     }
 }

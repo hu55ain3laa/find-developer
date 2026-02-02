@@ -926,6 +926,18 @@ body {
     border: 1px solid rgba(20, 184, 166, 0.2);
 }
 
+.availability-type-badge.availability-type-remote-full-time {
+    background-color: rgba(20, 184, 166, 0.1);
+    color: #0d9488;
+    border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+.availability-type-badge.availability-type-hybrid-full-time {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
 html.dark .availability-type-badge.availability-type-full-time {
     background-color: rgba(16, 185, 129, 0.2);
     color: #34d399;
@@ -954,6 +966,18 @@ html.dark .availability-type-badge.availability-type-remote {
     background-color: rgba(20, 184, 166, 0.2);
     color: #2dd4bf;
     border-color: rgba(20, 184, 166, 0.3);
+}
+
+html.dark .availability-type-badge.availability-type-remote-full-time {
+    background-color: rgba(20, 184, 166, 0.2);
+    color: #2dd4bf;
+    border-color: rgba(20, 184, 166, 0.3);
+}
+
+html.dark .availability-type-badge.availability-type-hybrid-full-time {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    border-color: rgba(139, 92, 246, 0.3);
 }
 
 /* Developer Bio */
