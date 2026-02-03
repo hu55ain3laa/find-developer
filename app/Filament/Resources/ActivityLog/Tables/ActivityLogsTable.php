@@ -85,6 +85,17 @@ class ActivityLogsTable
                     ->color('primary')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
+
+
+                TextColumn::make('created_at')
+                    ->label('تاريخ الإنشاء')
+                    ->dateTime('d-m-Y H:i:s')
+                    ->sortable(),
+
+                TextColumn::make('updated_at')
+                    ->label('تاريخ التحديث')
+                    ->dateTime('d-m-Y H:i:s')
+                    ->sortable(),
             ])
             ->pushFilters([
                 SelectFilter::make('event')
