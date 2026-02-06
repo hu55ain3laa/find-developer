@@ -6,6 +6,7 @@ use App\Enums\WorldGovernorate;
 use App\Models\Developer;
 use App\Models\JobTitle;
 use Filament\Widgets\ChartWidget;
+use Filament\Support\RawJs;
 
 class DevelopersByJobTitleChart extends ChartWidget
 {
@@ -26,7 +27,6 @@ class DevelopersByJobTitleChart extends ChartWidget
 
         $labels = [];
         $data = [];
-
         foreach ($jobTitles as $jobTitle) {
             $labels[] = $jobTitle->name;
             $data[] = $jobTitle->developers_count;
@@ -43,6 +43,20 @@ class DevelopersByJobTitleChart extends ChartWidget
             ],
             'labels' => $labels,
         ];
+    }
+
+    protected function getOptions(): RawJs
+    {
+        return RawJs::make(<<<JS
+            {
+               onClick: function(e, barElement, instance) {
+
+                let clickedElementIndex = instance.getActiveElements()[0].index;
+                let clickedName  = instance.data.labels[clickedElementIndex];
+                window.location.href = '/?jobTitles[0]=' + clickedName;
+                }
+            }
+        JS);
     }
 
     protected function getType(): string

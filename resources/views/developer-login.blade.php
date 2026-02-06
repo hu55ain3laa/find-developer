@@ -71,12 +71,6 @@
                 >
             </div>
 
-            <div class="form-group form-group-checkbox">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="remember" class="checkbox-input">
-                    <span>Remember me</span>
-                </label>
-            </div>
 
             <button type="submit" class="login-button">
                 <span>Login</span>
