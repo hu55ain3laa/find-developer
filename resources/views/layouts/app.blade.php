@@ -148,9 +148,15 @@
                         </svg>
                         Recommended
                     </a>
-                    <a href="{{ route('register') }}" class="navbar-link" style="border: 1px solid var(--color-primary);" @click="mobileMenuOpen = false">
-                        Register
-                    </a>
+                    @auth
+                        <a href="{{ url('/admin') }}" class="navbar-link" style="border: 1px solid var(--color-primary);" @click="mobileMenuOpen = false">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}" class="navbar-link" style="border: 1px solid var(--color-primary);" @click="mobileMenuOpen = false">
+                            Register
+                        </a>
+                    @endauth
                     @auth
                         @if(auth()->user()->isDeveloper())
                             <form method="POST" action="{{ route('developer.logout') }}" class="navbar-logout-form">
