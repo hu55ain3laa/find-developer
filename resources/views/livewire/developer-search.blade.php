@@ -181,7 +181,6 @@
                         <p class="section-subtitle-modern">Browse all registered developers</p>
                     </div>
                 </div>
-        <x-pagination-custom :paginator="$freeDevelopers" />
             </div>
             <div class="developers-grid-modern">
                 @foreach($freeDevelopers as $developer)
