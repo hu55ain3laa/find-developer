@@ -169,7 +169,6 @@
     <!-- Free Developers Section -->
     @if($freeDevelopers->count() > 0)
         <div class="modern-section">
-        <x-pagination-custom :paginator="$freeDevelopers" />
             <div class="section-header-modern">
                 <div class="section-title-wrapper">
                     <div class="section-icon-wrapper">
@@ -182,6 +181,7 @@
                         <p class="section-subtitle-modern">Browse all registered developers</p>
                     </div>
                 </div>
+        <x-pagination-custom :paginator="$freeDevelopers" />
             </div>
             <div class="developers-grid-modern">
                 @foreach($freeDevelopers as $developer)
