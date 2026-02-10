@@ -95,20 +95,6 @@
         @stack('styles')
     </head>
     <body>
-        <!-- Email Check Banner -->
-        <div class="email-check-banner">
-            <div class="email-check-banner-container">
-                <div class="email-check-banner-content">
-                    <svg class="email-check-banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <p class="email-check-banner-text">
-                        <strong>Important:</strong> After registering as a developer, please check the email address you registered with. We will send important updates and login credentials to that email.
-                    </p>
-                </div>
-            </div>
-        </div>
-
         <!-- Navigation -->
         <nav class="navbar"
              x-data="{ mobileMenuOpen: false, scrolled: false }"
@@ -210,6 +196,20 @@
                         <p class="info-banner-text">
                             <strong>Open Source!</strong> FindDeveloper is open source. If you find it useful, give us a star on GitHub — it helps us grow and improve!
                             <a href="https://github.com/ht3aa/find-developer" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: underline; font-weight: 600; margin-left: 0.5rem;">Star on GitHub →</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Check Banner -->
+            <div class="email-check-banner">
+                <div class="email-check-banner-container">
+                    <div class="email-check-banner-content">
+                        <svg class="email-check-banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <p class="email-check-banner-text">
+                            <strong>Important:</strong> After registering as a developer, please check the email address you registered with. We will send important updates and login credentials to that email.
                         </p>
                     </div>
                 </div>
