@@ -42,8 +42,6 @@ class DeveloperProfile extends Page implements HasSchemas
     {
         $this->record = auth()->user()->developer;
 
-        $this->record->makeVisible(['phone']);
-
         $this->form->fill($this->record->toArray());
     }
 
