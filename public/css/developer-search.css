@@ -1677,10 +1677,35 @@ button.pagination-link {
 
 /* Navigation (from layout) */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
     background-color: var(--bg-primary);
-    box-shadow: var(--shadow-sm);
     border-bottom: 1px solid var(--border-primary);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: all 0.3s ease-out;
+}
+
+.navbar.scrolled {
+    background: transparent;
+    border-bottom: none;
+    box-shadow: none;
+    padding-top: 0.75rem;
+}
+
+.navbar.scrolled .navbar-container {
+    max-width: 1300px;
+    padding: 0 5rem;
+    background-color: var(--bg-primary);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-primary);
+}
+
+.navbar-spacer {
+    height: 160px;
 }
 
 .navbar-container {
@@ -1692,6 +1717,7 @@ button.pagination-link {
     align-items: center;
     height: 70px;
     position: relative;
+    transition: all 0.3s ease-out;
 }
 
 .navbar-brand-group {
@@ -1998,9 +2024,20 @@ html.dark .dark-mode-icon.moon-icon {
 
 /* Info Banner */
 .info-banner {
-    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-secondary-light) 100%);
-    border-bottom: 1px solid var(--color-gray-200);
+    background: linear-gradient(135deg, rgba(0, 136, 210, 0.1) 0%, rgba(0, 136, 210, 0.05) 100%);
+    border-top: 1px solid rgba(0, 136, 210, 0.2);
+    border-bottom: 1px solid rgba(0, 136, 210, 0.2);
     padding: var(--spacing-md) 0;
+    max-height: 100px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.navbar.scrolled .info-banner {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
 }
 
 .info-banner-container {
@@ -2032,24 +2069,40 @@ html.dark .dark-mode-icon.moon-icon {
     line-height: 1.5;
 }
 
+@keyframes marquee {
+    0%, 5% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
 @media (max-width: 768px) {
+    .navbar-spacer {
+        height: 120px;
+    }
+
     .info-banner {
-        padding: var(--spacing-sm) 0;
+        padding: var(--spacing-xs) 0;
+        max-height: 32px;
+        overflow: hidden;
     }
-    
+
     .info-banner-container {
-        padding: 0 var(--spacing-md);
+        padding: 0 0 0 var(--spacing-lg);
+        overflow: hidden;
     }
-    
+
     .info-banner-content {
-        flex-direction: column;
-        gap: var(--spacing-xs);
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: var(--spacing-sm);
+        white-space: nowrap;
+        display: inline-flex;
+        animation: marquee 30s linear infinite;
     }
-    
+
     .info-banner-text {
         font-size: var(--font-size-xs);
     }
-    
+
     .info-banner-icon {
         width: 1rem;
         height: 1rem;
@@ -2062,6 +2115,16 @@ html.dark .dark-mode-icon.moon-icon {
     border-bottom: 1px solid rgba(245, 158, 11, 0.3);
     padding: var(--spacing-md) 0;
     position: relative;
+    max-height: 100px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.navbar.scrolled .email-check-banner {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
 }
 
 .email-check-banner-container {
@@ -2100,22 +2163,29 @@ html.dark .dark-mode-icon.moon-icon {
 
 @media (max-width: 768px) {
     .email-check-banner {
-        padding: var(--spacing-sm) 0;
+        padding: var(--spacing-xs) 0;
+        max-height: 32px;
+        overflow: hidden;
     }
-    
+
     .email-check-banner-container {
-        padding: 0 var(--spacing-md);
+        padding: 0 0 0 var(--spacing-lg);
+        overflow: hidden;
     }
-    
+
     .email-check-banner-content {
-        flex-direction: column;
-        gap: var(--spacing-xs);
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: var(--spacing-sm);
+        white-space: nowrap;
+        display: inline-flex;
+        animation: marquee 32s linear infinite;
     }
-    
+
     .email-check-banner-text {
         font-size: var(--font-size-xs);
     }
-    
+
     .email-check-banner-icon {
         width: 1rem;
         height: 1rem;
